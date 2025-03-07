@@ -1,12 +1,7 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-
 const HomeScreen = () => {
     return (
-        <>
-            <Header />
-            <Footer />
-        </>
+        <div>HomeScreen
+        </div>
     )
 };
 
