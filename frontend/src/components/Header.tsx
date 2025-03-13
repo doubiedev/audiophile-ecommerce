@@ -6,10 +6,10 @@ const Header = () => {
     const location = useLocation()
 
     return (
-        <>
+        <header>
             <Navbar />
             {location.pathname === "/" ? <Hero /> : <></>}
-        </>
+        </header>
     )
 }
 
