@@ -1,11 +1,14 @@
+import { useLocation } from "react-router";
 import Navbar from "./Navbar";
-import Banner from "./Banner";
+import Hero from "./Hero";
 
 const Header = () => {
+    const location = useLocation()
+
     return (
         <>
             <Navbar />
-            <Banner />
+            {location.pathname === "/" ? <Hero /> : <></>}
         </>
     )
 }
