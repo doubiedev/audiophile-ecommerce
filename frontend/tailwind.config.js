@@ -4,7 +4,7 @@ const config = {
     theme: {
         extend: {
             fontFamily: {
-                manrope: ['Manrope', 'sans-serif'],
+                manrope: ["Manrope", "sans-serif"],
             },
         },
     },

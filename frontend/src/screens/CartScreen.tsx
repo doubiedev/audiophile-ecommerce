@@ -1,9 +1,5 @@
 const CartScreen = () => {
-    return (
-        <>
-            CartScreen
-        </>
-    )
+    return <>CartScreen</>;
 };
 
 export default CartScreen;

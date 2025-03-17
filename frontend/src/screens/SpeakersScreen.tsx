@@ -1,9 +1,5 @@
 const SpeakersScreen = () => {
-    return (
-        <>
-            SpeakersScreen
-        </>
-    )
+    return <>SpeakersScreen</>;
 };
 
 export default SpeakersScreen;

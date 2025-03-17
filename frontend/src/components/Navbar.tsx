@@ -13,15 +13,18 @@ const Navbar = () => {
     return (
         <LayoutContainer>
             <nav className="w-full h-[89px] md:h-[96px] flex items-center justify-between border-b-1 border-white/20">
-                {isMobile ?
+                {isMobile ? (
                     <>
                         <div className="flex items-center">
                             <HamburgerMenu />
                         </div>
                         <Logo />
                         <Cart />
-                    </> : <></>}
-                {isTablet ?
+                    </>
+                ) : (
+                    <></>
+                )}
+                {isTablet ? (
                     <>
                         <div className="flex gap-x-[42px]">
                             <div className="flex items-center">
@@ -30,21 +33,47 @@ const Navbar = () => {
                             <Logo />
                         </div>
                         <Cart />
-                    </> : <></>}
-                {isDesktop ?
+                    </>
+                ) : (
+                    <></>
+                )}
+                {isDesktop ? (
                     <>
                         <Logo />
                         <div className="flex gap-x-[34px]">
-                            <NavLink to="/" className="text-white hover:text-orange-dark">Home</NavLink>
-                            <NavLink to="/headphones" className="text-white hover:text-orange-dark">Headphones</NavLink>
-                            <NavLink to="/speakers" className="text-white hover:text-orange-dark">Speakers</NavLink>
-                            <NavLink to="/earphones" className="text-white hover:text-orange-dark">Earphones</NavLink>
+                            <NavLink
+                                to="/"
+                                className="text-white hover:text-orange-dark"
+                            >
+                                Home
+                            </NavLink>
+                            <NavLink
+                                to="/headphones"
+                                className="text-white hover:text-orange-dark"
+                            >
+                                Headphones
+                            </NavLink>
+                            <NavLink
+                                to="/speakers"
+                                className="text-white hover:text-orange-dark"
+                            >
+                                Speakers
+                            </NavLink>
+                            <NavLink
+                                to="/earphones"
+                                className="text-white hover:text-orange-dark"
+                            >
+                                Earphones
+                            </NavLink>
                         </div>
                         <Cart />
-                    </> : <></>}
+                    </>
+                ) : (
+                    <></>
+                )}
             </nav>
         </LayoutContainer>
     );
-}
+};
 
 export default Navbar;

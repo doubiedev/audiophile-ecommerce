@@ -1,9 +1,5 @@
 const EarphonesScreen = () => {
-    return (
-        <>
-            EarphonesScreen
-        </>
-    )
+    return <>EarphonesScreen</>;
 };
 
 export default EarphonesScreen;
