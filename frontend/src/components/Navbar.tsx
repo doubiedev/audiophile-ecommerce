@@ -6,7 +6,6 @@ import Cart from "../assets/shared/desktop/icon-cart.svg";
 import HamburgerMenu from "../assets/shared/tablet/icon-hamburger.svg";
 
 const Navbar = () => {
-    // TODO: show specific navbar depending on if we are on homepage or not
     const location = useLocation();
 
     return (
