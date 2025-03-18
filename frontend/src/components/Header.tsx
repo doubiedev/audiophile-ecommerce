@@ -6,6 +6,9 @@ import heroImgDesktop from "../assets/home/desktop/image-hero.jpg";
 import heroImgTablet from "../assets/home/tablet/image-header.jpg";
 import heroImgMobile from "../assets/home/mobile/image-header.jpg";
 
+// TODO: Responsive design for tablet and mobile images
+// BUG: Hero image repeats in the y-axis
+
 const Header = () => {
     const location = useLocation();
     const { isDesktop, isTablet } = useResponsive();
@@ -16,18 +19,12 @@ const Header = () => {
             ? heroImgTablet
             : heroImgMobile;
 
-    const headerClass = isDesktop
-        ? "bg-center object-contain"
-        : isTablet
-            ? "bg-center"
-            : "bg-center";
-
     const navbarClass =
         location.pathname === "/" ? "bg-transparent" : "bg-black";
 
     return (
         <header
-            className={`h-[600px] sm:h-[729px] ${headerClass}`}
+            className={`h-[600px] sm:h-[729px] bg-center bg-no-repeat bg-auto sm:bg-cover md:bg-contain bg-[#191919]`}
             style={{
                 backgroundImage: `url(${heroImage})`,
             }}

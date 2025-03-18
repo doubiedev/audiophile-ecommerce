@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { useMediaQuery } from "react-responsive";
+import { useResponsive } from "../contexts/ResponsiveContext";
 import Logo from "../assets/shared/desktop/logo.svg";
 import Cart from "../assets/shared/desktop/icon-cart.svg";
 import HamburgerMenu from "../assets/shared/tablet/icon-hamburger.svg";
@@ -9,9 +9,7 @@ interface NavbarProps {
 }
 
 const Navbar = ({ className = "" }: NavbarProps) => {
-    const isMobile = useMediaQuery({ maxWidth: 767 });
-    const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 });
-    const isDesktop = useMediaQuery({ minWidth: 1024 });
+    const { isMobile, isTablet, isDesktop } = useResponsive();
 
     return (
         <nav
