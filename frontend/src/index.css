@@ -68,21 +68,29 @@ p {
     line-height: 25px;
 }
 
-overline,
-subtitle {
+.overline,
+.subtitle,
+.navlink {
     text-transform: uppercase;
 }
 
-overline {
+.overline {
     font-weight: 400;
     font-size: 0.875rem;
     line-height: 19px;
     letter-spacing: 10px;
 }
 
-subtitle {
+.subtitle {
     font-weight: 700;
     font-size: 0.8125rem;
     line-height: 25px;
     letter-spacing: 1px;
+}
+
+.navlink {
+    font-weight: 700;
+    font-size: 0.8125rem;
+    line-height: 25px;
+    letter-spacing: 2px;
 }

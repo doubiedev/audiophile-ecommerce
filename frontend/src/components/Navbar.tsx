@@ -43,25 +43,25 @@ const Navbar = () => {
                         <div className="flex gap-x-[34px]">
                             <NavLink
                                 to="/"
-                                className="text-white hover:text-orange-dark"
+                                className="navlink text-white hover:text-orange-dark"
                             >
                                 Home
                             </NavLink>
                             <NavLink
                                 to="/headphones"
-                                className="text-white hover:text-orange-dark"
+                                className="navlink text-white hover:text-orange-dark"
                             >
                                 Headphones
                             </NavLink>
                             <NavLink
                                 to="/speakers"
-                                className="text-white hover:text-orange-dark"
+                                className="navlink text-white hover:text-orange-dark"
                             >
                                 Speakers
                             </NavLink>
                             <NavLink
                                 to="/earphones"
-                                className="text-white hover:text-orange-dark"
+                                className="navlink text-white hover:text-orange-dark"
                             >
                                 Earphones
                             </NavLink>
