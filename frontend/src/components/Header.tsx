@@ -7,7 +7,7 @@ import heroImgTablet from "../assets/home/tablet/image-header.jpg";
 import heroImgMobile from "../assets/home/mobile/image-header.jpg";
 
 // TODO: Responsive design for tablet and mobile images
-// BUG: Hero image repeats in the y-axis
+// NOTE: Need to figure out how to make mobile img proper width
 
 const Header = () => {
     const location = useLocation();
