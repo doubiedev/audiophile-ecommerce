@@ -7,7 +7,11 @@ interface LayoutContainerProps {
 
 const LayoutContainer = ({ children }: LayoutContainerProps) => {
     return (
-        <div className={"mx-auto w-full max-w-[1190px] px-[24px] md:px-[40px]"}>
+        <div
+            className={
+                "mx-auto w-full h-full max-w-[1190px] px-[24px] md:px-[40px]"
+            }
+        >
             {children}
         </div>
     );
