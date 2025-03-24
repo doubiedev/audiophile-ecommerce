@@ -4,18 +4,13 @@ import Navbar from "./Navbar";
 import LayoutContainer from "./LayoutContainer";
 import heroImgDesktop from "../assets/home/desktop/image-hero.jpg";
 import heroImgTablet from "../assets/home/tablet/image-header.jpg";
-import heroImgMobile from "../assets/home/mobile/image-header.jpg";
 import BtnOrange from "./BtnOrange";
 
 const Header = () => {
     const location = useLocation();
-    const { isDesktop, isTablet } = useResponsive();
+    const { isDesktop } = useResponsive();
 
-    const heroImage = isDesktop
-        ? heroImgDesktop
-        : isTablet
-            ? heroImgTablet
-            : heroImgMobile;
+    const heroImage = isDesktop ? heroImgDesktop : heroImgTablet;
 
     const navbarClass =
         location.pathname === "/" ? "bg-transparent" : "bg-black";
@@ -29,13 +24,18 @@ const Header = () => {
         >
             <LayoutContainer>
                 <Navbar className={navbarClass} />
-                <section className="h-full flex">
-                    <div className="h-full flex-1 flex flex-col justify-center text-white">
-                        <div className="flex flex-col gap-y-[40px]">
-                            <div className="flex flex-col gap-y-[24px]">
+                <section className="h-full flex justify-center lg:justify-baseline">
+                    <div className="text-white min-w-0 w-full max-w-[379px] h-full lg:flex-1 flex flex-col justify-center">
+                        <div className="flex flex-col gap-y-[40px] items-center lg:items-baseline">
+                            <div className="flex flex-col gap-y-[24px] items-center lg:items-baseline">
                                 <p className="overline">New Product</p>
-                                <h1>XX99 Mark II Headphones</h1>
-                                <p>
+                                <h1 className="text-center hidden sm:inline :lg:text-left">
+                                    XX99 Mark II Headphones
+                                </h1>
+                                <h3 className="text-center sm:hidden">
+                                    XX99 Mark II Headphones
+                                </h3>
+                                <p className="text-center lg:text-left">
                                     Experience natural, lifelike audio and
                                     exceptional build quality made for the
                                     passionate music enthusiast.
