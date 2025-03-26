@@ -1,4 +1,5 @@
-import { NavLink, useNavigate } from "react-router";
+import { useState } from "react";
+import { NavLink } from "react-router";
 import { useResponsive } from "../contexts/ResponsiveContext";
 import Logo from "../assets/shared/desktop/logo.svg";
 import Cart from "../assets/shared/desktop/icon-cart.svg";
@@ -6,17 +7,19 @@ import NavMenu from "../assets/shared/tablet/icon-hamburger.svg";
 
 const Navbar = () => {
     const { isMobile, isTablet, isDesktop } = useResponsive();
-    const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleNavbar = () => {
+        setIsOpen(!isOpen);
+    };
 
     return (
-        <nav
-            className={`bg-transparent w-full h-[89px] md:h-[96px] flex items-center justify-between border-b-1 border-white/20`}
-        >
+        <nav className="bg-transparent w-full h-[89px] md:h-[96px] flex items-center justify-between border-b-1 border-white/20">
             {isMobile ? (
                 <>
                     <div
                         className="flex items-center"
-                        onClick={() => navigate("/")}
+                        onClick={() => toggleNavbar()}
                     >
                         <NavMenu />
                     </div>
@@ -29,7 +32,10 @@ const Navbar = () => {
             {isTablet ? (
                 <>
                     <div className="flex gap-x-[42px]">
-                        <div className="flex items-center">
+                        <div
+                            className="flex items-center"
+                            onClick={() => toggleNavbar()}
+                        >
                             <NavMenu />
                         </div>
                         <Logo />
