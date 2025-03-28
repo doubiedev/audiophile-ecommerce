@@ -1,5 +1,6 @@
 import LayoutContainer from "../components/LayoutContainer";
 import Categories from "../components/Categories";
+import ProductShowcase from "../components/ProductShowcase";
 
 const HomeScreen = () => {
     return (
@@ -7,7 +8,7 @@ const HomeScreen = () => {
             <section className="my-[6rem]">
                 <Categories />
             </section>
-            <section>Products Showcase Component</section>
+            <ProductShowcase />
             <section>About us Component</section>
         </LayoutContainer>
     );
