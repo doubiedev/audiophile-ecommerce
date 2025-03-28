@@ -6,6 +6,7 @@ interface BtnShopProps {
 }
 
 // FIX: Slightly off-center ArrowRight vs text
+// BUG: Orange text should be on hover for ArrowRight as well
 const BtnShop: React.FC<BtnShopProps> = ({ link }) => {
     return (
         <NavLink to={link} className="flex items-center h-fit w-fit">
