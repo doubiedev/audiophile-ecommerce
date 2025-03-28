@@ -1,5 +1,5 @@
 import zx9Speaker from "../assets/home/desktop/image-speaker-zx9.png";
-import zx7Speaker from "../assets/home/desktop/image-speaker-zx7.png";
+import zx7Speaker from "../assets/home/desktop/image-speaker-zx7.jpg";
 import yx9Earphones from "../assets/home/desktop/image-earphones-yx1.jpg";
 import ProductCircles from "../assets/home/desktop/pattern-circles.svg";
 import BtnDark from "./BtnDark";
@@ -35,9 +35,14 @@ const ProductShowcase = () => {
                 </div>
             </div>
 
-            <div>
-                <div>ZX7 Speaker</div>
-                <BtnTransparent />
+            <div
+                className="relative flex rounded-lg bg-grey-dark h-[320px] items-center"
+                style={{ backgroundImage: `url(${zx7Speaker})` }}
+            >
+                <div className="flex flex-col ml-[95px] gap-[2rem]">
+                    <h3>ZX7 Speaker</h3>
+                    <BtnTransparent />
+                </div>
             </div>
 
             <div>
