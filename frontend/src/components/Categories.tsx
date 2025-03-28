@@ -6,7 +6,7 @@ import CategoryCard from "./CategoryCard";
 // TODO: Responsive sizes for Categories
 const Categories = () => {
     return (
-        <div className="flex gap-[30px] h-fit">
+        <div className="flex flex-col sm:flex-row gap-[30px] h-fit">
             <CategoryCard
                 image={headphones}
                 title="Headphones"
