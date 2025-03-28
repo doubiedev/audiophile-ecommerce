@@ -3,7 +3,6 @@ import speakers from "../assets/shared/desktop/image-category-thumbnail-speakers
 import earphones from "../assets/shared/desktop/image-category-thumbnail-earphones.png";
 import CategoryCard from "./CategoryCard";
 
-// TODO: Responsive sizes for Categories
 const Categories = () => {
     return (
         <div className="flex flex-col sm:flex-row gap-[30px] h-fit">
