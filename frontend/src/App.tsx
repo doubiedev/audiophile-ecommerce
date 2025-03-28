@@ -8,6 +8,7 @@ import CartScreen from "./screens/CartScreen";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
+// FIX: Hero sections for non-Homescreen pages
 const App = () => {
     return (
         <>

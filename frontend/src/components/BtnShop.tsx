@@ -1,6 +1,7 @@
 import ArrowRight from "../assets/shared/desktop/icon-arrow-right.svg";
 import { NavLink } from "react-router";
 
+// FIX: Link over whole div not just text
 const BtnShop = () => {
     return (
         <div className="flex items-center h-fit w-fit">

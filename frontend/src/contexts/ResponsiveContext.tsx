@@ -9,6 +9,7 @@ interface ResponsiveContextProps {
 
 const ResponsiveContext = createContext<ResponsiveContextProps | null>(null);
 
+// FIX: Fast Refresh issue with useResponsive context
 export const useResponsive = () => {
     const context = useContext(ResponsiveContext);
     if (!context) {

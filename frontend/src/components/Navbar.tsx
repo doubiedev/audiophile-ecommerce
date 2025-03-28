@@ -5,6 +5,9 @@ import Logo from "../assets/shared/desktop/logo.svg";
 import Cart from "../assets/shared/desktop/icon-cart.svg";
 import NavMenu from "../assets/shared/tablet/icon-hamburger.svg";
 
+// TODO: Logo navlink to "/"
+// TODO: Hamburger menu dropdown
+
 const Navbar = () => {
     const { isMobile, isTablet, isDesktop } = useResponsive();
     const [isOpen, setIsOpen] = useState(false);
