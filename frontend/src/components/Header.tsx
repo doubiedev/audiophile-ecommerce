@@ -28,7 +28,7 @@ const Header = () => {
                                 <div className="flex flex-col gap-y-[40px] items-center lg:items-baseline">
                                     <div className="flex flex-col gap-y-[24px] items-center lg:items-baseline">
                                         <p className="overline">New Product</p>
-                                        <h1 className="text-center hidden sm:inline :lg:text-left">
+                                        <h1 className="text-center hidden sm:inline lg:text-left">
                                             XX99 Mark II Headphones
                                         </h1>
                                         <h3 className="text-center sm:hidden">
