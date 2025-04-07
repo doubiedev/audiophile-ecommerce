@@ -27,14 +27,16 @@ const Header = () => {
                             <div className="text-white min-w-0 w-full max-w-[379px] h-full lg:flex-1 flex flex-col justify-center">
                                 <div className="flex flex-col gap-y-[40px] items-center lg:items-baseline">
                                     <div className="flex flex-col gap-y-[24px] items-center lg:items-baseline">
-                                        <p className="overline">New Product</p>
+                                        <p className="overline opacity-50">
+                                            New Product
+                                        </p>
                                         <h1 className="text-center hidden sm:inline lg:text-left">
                                             XX99 Mark II Headphones
                                         </h1>
                                         <h3 className="text-center sm:hidden">
                                             XX99 Mark II Headphones
                                         </h3>
-                                        <p className="text-center lg:text-left">
+                                        <p className="text-center lg:text-left opacity-75">
                                             Experience natural, lifelike audio
                                             and exceptional build quality made
                                             for the passionate music enthusiast.
