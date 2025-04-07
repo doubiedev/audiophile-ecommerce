@@ -10,17 +10,17 @@ const ProductShowcase = () => {
     return (
         <section>
             <div className="relative mb-[3rem] flex bg-orange-dark rounded-lg">
-                <div className="absolute top-[-20px] left-[-160px]">
+                <div className="absolute top-[-20px] left-[-160px] z-0">
                     <ProductCircles />
                 </div>
-                <div className="flex-1 overflow-hidden">
+                <div className="flex-1 overflow-hidden z-10">
                     <img
                         src={zx9Speaker}
                         alt="ZX9 Speaker"
                         className="relative w-[395px] top-[6rem] left-[120px]"
                     />
                 </div>
-                <div className="flex-1 flex justify-center">
+                <div className="flex-1 flex justify-center z-10">
                     <div className="mx-[95px] mt-[133px] mb-[124px]">
                         <h1 className="mb-[1.5rem] text-white">
                             ZX9 <br />
