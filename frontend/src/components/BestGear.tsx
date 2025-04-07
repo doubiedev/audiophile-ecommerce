@@ -2,7 +2,7 @@ import bestGear from "../assets/shared/desktop/image-best-gear.jpg";
 
 const BestGear = () => {
     return (
-        <section className="flex items-center gap-[125px]">
+        <section className="flex items-center gap-[125px] mb-[10rem]">
             <div className="flex flex-col gap-[2rem]">
                 <h2>
                     Bringing you the{" "}

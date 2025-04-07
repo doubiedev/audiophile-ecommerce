@@ -68,6 +68,10 @@ p {
     line-height: 25px;
 }
 
+.text-bold {
+    font-weight: 700;
+}
+
 .overline,
 .subtitle,
 .navlink {

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { NavLink } from "react-router";
 import { useResponsive } from "../contexts/ResponsiveContext";
 import Logo from "../assets/shared/desktop/logo.svg";
 import Cart from "../assets/shared/desktop/icon-cart.svg";
 import NavMenu from "../assets/shared/tablet/icon-hamburger.svg";
+import NavLinks from "./NavLinks";
 
 // TODO: Logo navlink to "/"
 // TODO: Hamburger menu dropdown
@@ -51,32 +51,7 @@ const Navbar = () => {
             {isDesktop ? (
                 <>
                     <Logo />
-                    <div className="flex gap-x-[34px]">
-                        <NavLink
-                            to="/"
-                            className="navlink text-white hover:text-orange-dark"
-                        >
-                            Home
-                        </NavLink>
-                        <NavLink
-                            to="/headphones"
-                            className="navlink text-white hover:text-orange-dark"
-                        >
-                            Headphones
-                        </NavLink>
-                        <NavLink
-                            to="/speakers"
-                            className="navlink text-white hover:text-orange-dark"
-                        >
-                            Speakers
-                        </NavLink>
-                        <NavLink
-                            to="/earphones"
-                            className="navlink text-white hover:text-orange-dark"
-                        >
-                            Earphones
-                        </NavLink>
-                    </div>
+                    <NavLinks />
                     <Cart />
                 </>
             ) : (
