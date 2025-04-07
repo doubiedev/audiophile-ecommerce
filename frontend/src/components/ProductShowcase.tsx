@@ -45,7 +45,7 @@ const ProductShowcase = () => {
                 </div>
             </div>
 
-            <div className="flex mt-[3rem] gap-[30px]">
+            <div className="flex mt-[3rem] gap-[30px] mb-[200px]">
                 <div className="flex-1">
                     <img
                         src={yx1Earphones}
