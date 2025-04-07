@@ -1,6 +1,6 @@
 import zx9Speaker from "../assets/home/desktop/image-speaker-zx9.png";
 import zx7Speaker from "../assets/home/desktop/image-speaker-zx7.jpg";
-import yx9Earphones from "../assets/home/desktop/image-earphones-yx1.jpg";
+import yx1Earphones from "../assets/home/desktop/image-earphones-yx1.jpg";
 import ProductCircles from "../assets/home/desktop/pattern-circles.svg";
 import BtnDark from "./BtnDark";
 import BtnTransparent from "./BtnTransparent";
@@ -45,11 +45,19 @@ const ProductShowcase = () => {
                 </div>
             </div>
 
-            <div>
-                <div>YX1 Earphones IMG</div>
-                <div>
-                    <div>YX1 Earphones</div>
-                    <BtnTransparent />
+            <div className="flex mt-[3rem] gap-[30px]">
+                <div className="flex-1">
+                    <img
+                        src={yx1Earphones}
+                        alt="YX1 Earphones"
+                        className="rounded-lg"
+                    />
+                </div>
+                <div className="flex items-center flex-1 bg-grey-dark rounded-lg">
+                    <div className="ml-[95px] flex flex-col gap-[2rem]">
+                        <h3>YX1 Earphones</h3>
+                        <BtnTransparent />
+                    </div>
                 </div>
             </div>
         </section>
