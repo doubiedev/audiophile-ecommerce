@@ -11,6 +11,7 @@ const Header = () => {
     const { isDesktop } = useResponsive();
 
     const heroImage = isDesktop ? heroImgDesktop : heroImgTablet;
+    const title = location.pathname.slice(1);
 
     return (
         <>
@@ -54,6 +55,9 @@ const Header = () => {
                 <header className="bg-black">
                     <LayoutContainer>
                         <Navbar />
+                        <div className="h-[240px] flex justify-center items-center">
+                            <h2 className="text-white">{title}</h2>
+                        </div>
                     </LayoutContainer>
                 </header>
             )}
