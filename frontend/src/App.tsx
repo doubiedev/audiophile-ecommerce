@@ -1,14 +1,11 @@
 import { Routes, Route } from "react-router";
 import { ResponsiveProvider } from "./contexts/ResponsiveContext";
 import HomeScreen from "./screens/HomeScreen";
-import HeadphonesScreen from "./screens/HeadphonesScreen";
-import SpeakersScreen from "./screens/SpeakersScreen";
-import EarphonesScreen from "./screens/EarphonesScreen";
+import CategoriesScreen from "./screens/CategoriesScreen";
 import CartScreen from "./screens/CartScreen";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-// FIX: Hero sections for non-Homescreen pages
 const App = () => {
     return (
         <>
@@ -16,9 +13,9 @@ const App = () => {
                 <Header />
                 <Routes>
                     <Route path="/" element={<HomeScreen />} />
-                    <Route path="/headphones" element={<HeadphonesScreen />} />
-                    <Route path="/speakers" element={<SpeakersScreen />} />
-                    <Route path="/earphones" element={<EarphonesScreen />} />
+                    <Route path="/headphones" element={<CategoriesScreen />} />
+                    <Route path="/speakers" element={<CategoriesScreen />} />
+                    <Route path="/earphones" element={<CategoriesScreen />} />
                     <Route path="/cart" element={<CartScreen />} />
                 </Routes>
                 <Footer />
