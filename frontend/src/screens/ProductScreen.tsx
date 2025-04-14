@@ -22,8 +22,10 @@ const ProductScreen = () => {
 
     if (!product) return <p>Product not found.</p>;
 
-    const imagePath = `../assets/${product.image.desktop}`;
-    const imageSrc = images[imagePath] as string;
+    const showcaseImages = product.image.showcases.map((relativePath) => {
+        const imagePath = `../assets/${relativePath}`;
+        return images[imagePath] as string;
+    });
 
     return (
         <LayoutContainer>
@@ -59,7 +61,22 @@ const ProductScreen = () => {
                         </div>
                     </div>
                 </div>
-                <div>Product Showcase Images</div>
+                <div className="flex gap-[30px]">
+                    <div className="flex flex-col gap-[30px]">
+                        <img
+                            src={showcaseImages[0]}
+                            alt={`${product.name} showcase 1`}
+                        />
+                        <img
+                            src={showcaseImages[1]}
+                            alt={`${product.name} showcase 2`}
+                        />
+                    </div>
+                    <img
+                        src={showcaseImages[2]}
+                        alt={`${product.name} showcase 3`}
+                    />
+                </div>
                 <div>You may also like</div>
                 <Categories />
                 <BestGear />
