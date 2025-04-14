@@ -4,11 +4,12 @@ import Logo from "../assets/shared/desktop/logo.svg";
 import Cart from "../assets/shared/desktop/icon-cart.svg";
 import NavMenu from "../assets/shared/tablet/icon-hamburger.svg";
 import NavLinks from "./NavLinks";
+import { useNavigate } from "react-router";
 
-// TODO: Logo navlink to "/"
 // TODO: Hamburger menu dropdown
 
 const Navbar = () => {
+    const navigate = useNavigate();
     const { isMobile, isTablet, isDesktop } = useResponsive();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -26,7 +27,12 @@ const Navbar = () => {
                     >
                         <NavMenu />
                     </div>
-                    <Logo />
+                    <div
+                        className="hover:cursor-pointer"
+                        onClick={() => navigate("/")}
+                    >
+                        <Logo />
+                    </div>
                     <Cart />
                 </>
             ) : (
@@ -41,7 +47,12 @@ const Navbar = () => {
                         >
                             <NavMenu />
                         </div>
-                        <Logo />
+                        <div
+                            className="hover:cursor-pointer"
+                            onClick={() => navigate("/")}
+                        >
+                            <Logo />
+                        </div>
                     </div>
                     <Cart />
                 </>
@@ -50,7 +61,12 @@ const Navbar = () => {
             )}
             {isDesktop ? (
                 <>
-                    <Logo />
+                    <div
+                        className="hover:cursor-pointer"
+                        onClick={() => navigate("/")}
+                    >
+                        <Logo />
+                    </div>
                     <NavLinks />
                     <Cart />
                 </>
