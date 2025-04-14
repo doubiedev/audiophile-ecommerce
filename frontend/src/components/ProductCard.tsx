@@ -28,6 +28,7 @@ const ProductCard = ({
     );
 
     if (!product) return <p>Product not found.</p>;
+    const productFullName = product.name + " " + product.category;
 
     const imagePath = `../assets/${product.image.desktop}`;
     const imageSrc = images[imagePath] as string;
@@ -36,7 +37,7 @@ const ProductCard = ({
         <div className="flex gap-[125px] items-center">
             {isImageLeft && (
                 <div className="flex-1">
-                    {imageSrc && <img src={imageSrc} alt={product.name} />}
+                    {imageSrc && <img src={imageSrc} alt={productFullName} />}
                 </div>
             )}
 
@@ -46,7 +47,7 @@ const ProductCard = ({
                         New Product
                     </p>
                 )}
-                <h2>{product.name}</h2>
+                <h2>{productFullName}</h2>
                 <p className="mt-[2rem] mb-[40px]">{product.description}</p>
                 {isPurchasable ? (
                     <div className="flex flex-col gap-[47px]">
@@ -69,7 +70,7 @@ const ProductCard = ({
 
             {!isImageLeft && (
                 <div className="flex-1">
-                    {imageSrc && <img src={imageSrc} alt={product.name} />}
+                    {imageSrc && <img src={imageSrc} alt={productFullName} />}
                 </div>
             )}
         </div>

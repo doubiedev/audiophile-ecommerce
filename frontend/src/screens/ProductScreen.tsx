@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router";
 import data from "../data.json";
 import { useMemo } from "react";
 import ProductCard from "../components/ProductCard";
+import RecommendedProductCard from "../components/RecommendedProductCard";
 
 const ProductScreen = () => {
     const navigate = useNavigate();
@@ -77,7 +78,14 @@ const ProductScreen = () => {
                         alt={`${product.name} showcase 3`}
                     />
                 </div>
-                <div>You may also like</div>
+                <div className="flex flex-col items-center gap-[4rem]">
+                    <h3>You may also like</h3>
+                    <div className="flex justify-center gap-[30px]">
+                        <RecommendedProductCard id={product.recommended[0]} />
+                        <RecommendedProductCard id={product.recommended[1]} />
+                        <RecommendedProductCard id={product.recommended[2]} />
+                    </div>
+                </div>
                 <Categories />
                 <BestGear />
             </div>
