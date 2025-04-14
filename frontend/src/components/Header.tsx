@@ -1,17 +1,23 @@
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { useResponsive } from "../contexts/ResponsiveContext";
 import Navbar from "./Navbar";
 import LayoutContainer from "./LayoutContainer";
 import heroImgDesktop from "../assets/home/desktop/image-hero.jpg";
 import heroImgTablet from "../assets/home/tablet/image-header.jpg";
 import BtnOrange from "./BtnOrange";
+import data from "../data.json";
 
 const Header = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const { isDesktop } = useResponsive();
 
+    const id = 1;
+    const product = data.find((item) => item.id === id);
+    if (!product) return <p>Product not found.</p>;
+
     const heroImage = isDesktop ? heroImgDesktop : heroImgTablet;
-    const title = location.pathname.slice(1);
+    const title = location.pathname.split("/")[1];
 
     return (
         <>
@@ -32,10 +38,10 @@ const Header = () => {
                                             New Product
                                         </p>
                                         <h1 className="text-center hidden sm:inline lg:text-left">
-                                            XX99 Mark II Headphones
+                                            {product.name}
                                         </h1>
                                         <h3 className="text-center sm:hidden">
-                                            XX99 Mark II Headphones
+                                            {product.name}
                                         </h3>
                                         <p className="text-center lg:text-left opacity-75">
                                             Experience natural, lifelike audio
@@ -43,7 +49,14 @@ const Header = () => {
                                             for the passionate music enthusiast.
                                         </p>
                                     </div>
-                                    <BtnOrange />
+                                    <div
+                                        onClick={() => {
+                                            navigate(`/products/${id}`);
+                                            window.scrollTo(0, 0);
+                                        }}
+                                    >
+                                        <BtnOrange />
+                                    </div>
                                 </div>
                             </div>
                             {isDesktop && <div className="flex-1"></div>}
@@ -51,13 +64,21 @@ const Header = () => {
                         </section>
                     </LayoutContainer>
                 </header>
-            ) : (
+            ) : location.pathname === "/headphones" ||
+                location.pathname === "/speakers" ||
+                location.pathname === "/earphones" ? (
                 <header className="bg-black">
                     <LayoutContainer>
                         <Navbar />
                         <div className="h-[240px] flex justify-center items-center">
                             <h2 className="text-white">{title}</h2>
                         </div>
+                    </LayoutContainer>
+                </header>
+            ) : (
+                <header className="bg-black">
+                    <LayoutContainer>
+                        <Navbar />
                     </LayoutContainer>
                 </header>
             )}

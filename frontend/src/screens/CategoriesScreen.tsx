@@ -9,28 +9,28 @@ const CategoriesScreen = () => {
 
     return (
         <LayoutContainer>
-            {location.pathname === "/headphones" && (
-                <>
-                    <ProductCard id={1} isImageLeft={true} />
-                    <ProductCard id={2} isImageLeft={false} />
-                    <ProductCard id={3} isImageLeft={true} />
-                </>
-            )}
-            {location.pathname === "/speakers" && (
-                <>
-                    <ProductCard id={4} isImageLeft={true} />
-                    <ProductCard id={5} isImageLeft={false} />
-                </>
-            )}
-            {location.pathname === "/earphones" && (
-                <>
-                    <ProductCard id={6} isImageLeft={true} />
-                </>
-            )}
-            <div className="h-[10rem]"></div>
-            <Categories />
-            <div className="h-[10rem]"></div>
-            <BestGear />
+            <section className="flex flex-col gap-[10rem] mt-[10rem]">
+                {location.pathname === "/headphones" && (
+                    <>
+                        <ProductCard id={1} />
+                        <ProductCard id={2} isImageLeft={false} />
+                        <ProductCard id={3} />
+                    </>
+                )}
+                {location.pathname === "/speakers" && (
+                    <>
+                        <ProductCard id={4} />
+                        <ProductCard id={5} isImageLeft={false} />
+                    </>
+                )}
+                {location.pathname === "/earphones" && (
+                    <>
+                        <ProductCard id={6} />
+                    </>
+                )}
+                <Categories />
+                <BestGear />
+            </section>
         </LayoutContainer>
     );
 };
