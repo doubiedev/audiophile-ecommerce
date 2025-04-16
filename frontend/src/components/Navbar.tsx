@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useResponsive } from "../contexts/ResponsiveContext";
 import Logo from "../assets/shared/desktop/logo.svg";
-import Cart from "../assets/shared/desktop/icon-cart.svg";
+import CartIcon from "../assets/shared/desktop/icon-cart.svg";
 import NavMenu from "../assets/shared/tablet/icon-hamburger.svg";
 import NavLinks from "./NavLinks";
 import { useNavigate } from "react-router";
+import Cart from "./Cart"
 
 // TODO: Hamburger menu dropdown
 
@@ -18,8 +19,8 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-transparent w-full h-[89px] md:h-[96px] flex items-center justify-between border-b-1 border-white/20">
-            {isMobile ? (
+        <nav className="bg-transparent w-full h-[89px] md:h-[96px] flex items-center justify-between border-b-1 border-white/20 relative">
+            {isMobile && (
                 <>
                     <div
                         className="flex items-center"
@@ -33,12 +34,10 @@ const Navbar = () => {
                     >
                         <Logo />
                     </div>
-                    <Cart />
+                    <CartIcon />
                 </>
-            ) : (
-                <></>
             )}
-            {isTablet ? (
+            {isTablet && (
                 <>
                     <div className="flex gap-x-[42px]">
                         <div
@@ -54,12 +53,11 @@ const Navbar = () => {
                             <Logo />
                         </div>
                     </div>
-                    <Cart />
+                    <CartIcon />
                 </>
-            ) : (
-                <></>
-            )}
-            {isDesktop ? (
+            )
+            }
+            {isDesktop && (
                 <>
                     <div
                         className="hover:cursor-pointer"
@@ -68,11 +66,10 @@ const Navbar = () => {
                         <Logo />
                     </div>
                     <NavLinks />
-                    <Cart />
+                    <CartIcon />
                 </>
-            ) : (
-                <></>
             )}
+            <Cart />
         </nav>
     );
 };

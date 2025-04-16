@@ -1,26 +1,42 @@
 import { useContext, createContext, useState } from "react";
 
-const AppContext = createContext<boolean | null>(null);
-const AppUpdateContext = createContext<(() => void) | null>(null);
+type AppContextType = {
+    isCartOpen: boolean;
+};
+
+type AppUpdateContextType = {
+    toggleCart: () => void;
+};
+
+const AppContext = createContext<AppContextType | null>(null);
+const AppUpdateContext = createContext<AppUpdateContextType | null>(null);
 
 export const useApp = () => {
-    return useContext(AppContext);
+    const context = useContext(AppContext);
+    if (!context) {
+        throw new Error("useApp must be used within an AppProvider");
+    }
+    return context;
 };
 
 export const useAppUpdate = () => {
-    return useContext(AppUpdateContext);
+    const context = useContext(AppUpdateContext);
+    if (!context) {
+        throw new Error("useAppUpdate must be used within an AppProvider");
+    }
+    return context;
 };
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
-    const [test, setTest] = useState<boolean>(true);
+    const [isCartOpen, setIsCartOpen] = useState(true);
 
-    const toggleTest = () => {
-        setTest((prevTest) => !prevTest);
+    const toggleCart = () => {
+        setIsCartOpen(!isCartOpen);
     };
 
     return (
-        <AppContext.Provider value={test}>
-            <AppUpdateContext.Provider value={toggleTest}>
+        <AppContext.Provider value={{ isCartOpen }}>
+            <AppUpdateContext.Provider value={{ toggleCart }}>
                 {children}
             </AppUpdateContext.Provider>
         </AppContext.Provider>

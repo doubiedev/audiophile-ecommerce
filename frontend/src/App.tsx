@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router";
 import { ResponsiveProvider } from "./contexts/ResponsiveContext";
+import { AppProvider } from "./contexts/AppContext";
 import HomeScreen from "./screens/HomeScreen";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import CartScreen from "./screens/CartScreen";
@@ -9,7 +10,7 @@ import Footer from "./components/Footer";
 
 const App = () => {
     return (
-        <>
+        <AppProvider>
             <ResponsiveProvider>
                 <Header />
                 <Routes>
@@ -22,7 +23,7 @@ const App = () => {
                 </Routes>
                 <Footer />
             </ResponsiveProvider>
-        </>
+        </AppProvider>
     );
 };
 
