@@ -28,7 +28,7 @@ export const useAppUpdate = () => {
 };
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
-    const [isCartOpen, setIsCartOpen] = useState(true);
+    const [isCartOpen, setIsCartOpen] = useState(false);
 
     const toggleCart = () => {
         setIsCartOpen(!isCartOpen);

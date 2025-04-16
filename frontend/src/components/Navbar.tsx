@@ -5,11 +5,14 @@ import CartIcon from "../assets/shared/desktop/icon-cart.svg";
 import NavMenu from "../assets/shared/tablet/icon-hamburger.svg";
 import NavLinks from "./NavLinks";
 import { useNavigate } from "react-router";
-import Cart from "./Cart"
+import Cart from "./Cart";
+import { useAppUpdate } from "../contexts/AppContext";
 
 // TODO: Hamburger menu dropdown
 
 const Navbar = () => {
+    const { toggleCart } = useAppUpdate();
+
     const navigate = useNavigate();
     const { isMobile, isTablet, isDesktop } = useResponsive();
     const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +22,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-transparent w-full h-[89px] md:h-[96px] flex items-center justify-between border-b-1 border-white/20 relative">
+        <nav className="z-20 bg-transparent w-full h-[89px] md:h-[96px] flex items-center justify-between border-b-1 border-white/20 relative">
             {isMobile && (
                 <>
                     <div
@@ -34,7 +37,9 @@ const Navbar = () => {
                     >
                         <Logo />
                     </div>
-                    <CartIcon />
+                    <div className="hover:cursor-pointer" onClick={toggleCart}>
+                        <CartIcon />
+                    </div>
                 </>
             )}
             {isTablet && (
@@ -53,10 +58,11 @@ const Navbar = () => {
                             <Logo />
                         </div>
                     </div>
-                    <CartIcon />
+                    <div className="hover:cursor-pointer" onClick={toggleCart}>
+                        <CartIcon />
+                    </div>
                 </>
-            )
-            }
+            )}
             {isDesktop && (
                 <>
                     <div
@@ -66,7 +72,9 @@ const Navbar = () => {
                         <Logo />
                     </div>
                     <NavLinks />
-                    <CartIcon />
+                    <div className="hover:cursor-pointer" onClick={toggleCart}>
+                        <CartIcon />
+                    </div>
                 </>
             )}
             <Cart />

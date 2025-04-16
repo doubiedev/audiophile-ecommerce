@@ -1,28 +1,29 @@
-import cart from "../cart.json"
-import { useApp } from "../contexts/AppContext"
+import cart from "../cart.json";
+import { useApp } from "../contexts/AppContext";
 
 const Cart = () => {
-    const { isCartOpen } = useApp()
+    const { isCartOpen } = useApp();
 
     return (
         <>
-            {isCartOpen &&
-                <section className="flex flex-col bg-white absolute top-[121px] md:top-[128px] right-0">
+            {isCartOpen && (
+                <section className="flex flex-col bg-white absolute top-[121px] md:top-[128px] right-0 p-[2rem] rounded-lg">
                     <div>
-                        <h5>CART (<span>numItems</span>)</h5>
+                        <h5>
+                            CART (<span>numItems</span>)
+                        </h5>
                         <p>Remove all</p>
                     </div>
-                    <div>
-                        Map over cart items here as cards
-                    </div>
+                    <div>Map over cart items here as cards</div>
                     <div>
                         <p>Total</p>
                         <p>$totalPrice</p>
                     </div>
                     <div>CheckoutBtn</div>
-                </section>}
+                </section>
+            )}
         </>
-    )
-}
+    );
+};
 
-export default Cart
+export default Cart;
