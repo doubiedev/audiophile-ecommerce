@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { useResponsive } from "../contexts/ResponsiveContext";
 import Logo from "../assets/shared/desktop/logo.svg";
-import Cart from "../assets/shared/desktop/icon-cart.svg";
+import CartIcon from "../assets/shared/desktop/icon-cart.svg";
 import NavMenu from "../assets/shared/tablet/icon-hamburger.svg";
 import NavLinks from "./NavLinks";
 import { useNavigate } from "react-router";
+import Cart from "./Cart";
+import { useAppUpdate } from "../contexts/AppContext";
 
 // TODO: Hamburger menu dropdown
 
 const Navbar = () => {
+    const { toggleCart } = useAppUpdate();
+
     const navigate = useNavigate();
     const { isMobile, isTablet, isDesktop } = useResponsive();
     const [isOpen, setIsOpen] = useState(false);
@@ -18,8 +22,8 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-transparent w-full h-[89px] md:h-[96px] flex items-center justify-between border-b-1 border-white/20">
-            {isMobile ? (
+        <nav className="z-20 bg-transparent w-full h-[89px] md:h-[96px] flex items-center justify-between border-b-1 border-white/20 relative">
+            {isMobile && (
                 <>
                     <div
                         className="flex items-center"
@@ -33,12 +37,12 @@ const Navbar = () => {
                     >
                         <Logo />
                     </div>
-                    <Cart />
+                    <div className="hover:cursor-pointer" onClick={toggleCart}>
+                        <CartIcon />
+                    </div>
                 </>
-            ) : (
-                <></>
             )}
-            {isTablet ? (
+            {isTablet && (
                 <>
                     <div className="flex gap-x-[42px]">
                         <div
@@ -54,12 +58,12 @@ const Navbar = () => {
                             <Logo />
                         </div>
                     </div>
-                    <Cart />
+                    <div className="hover:cursor-pointer" onClick={toggleCart}>
+                        <CartIcon />
+                    </div>
                 </>
-            ) : (
-                <></>
             )}
-            {isDesktop ? (
+            {isDesktop && (
                 <>
                     <div
                         className="hover:cursor-pointer"
@@ -68,11 +72,12 @@ const Navbar = () => {
                         <Logo />
                     </div>
                     <NavLinks />
-                    <Cart />
+                    <div className="hover:cursor-pointer" onClick={toggleCart}>
+                        <CartIcon />
+                    </div>
                 </>
-            ) : (
-                <></>
             )}
+            <Cart />
         </nav>
     );
 };

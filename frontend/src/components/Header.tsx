@@ -38,10 +38,10 @@ const Header = () => {
                                             New Product
                                         </p>
                                         <h1 className="text-center hidden sm:inline lg:text-left">
-                                            {product.name}
+                                            {product.name} {product.category}
                                         </h1>
                                         <h3 className="text-center sm:hidden">
-                                            {product.name}
+                                            {product.name} {product.category}
                                         </h3>
                                         <p className="text-center lg:text-left opacity-75">
                                             Experience natural, lifelike audio

@@ -62,8 +62,7 @@ h6 {
     letter-spacing: 1.3px;
 }
 
-p,
-span {
+p {
     font-weight: 500;
     font-size: 0.9375rem;
     line-height: 25px;
