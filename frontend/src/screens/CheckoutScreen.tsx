@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import LayoutContainer from "../components/LayoutContainer";
 import { useState } from "react";
+import BtnOrange from "../components/BtnOrange";
 
 const CheckoutScreen = () => {
     const navigate = useNavigate();
@@ -219,8 +220,24 @@ const CheckoutScreen = () => {
                             </div>
                         </form>
                     </section>
-                    <section className="w-[350px] h-[612px] bg-white">
-                        Summary
+                    <section className="flex flex-col w-[350px] h-[612px] bg-white p-[2rem]">
+                        <h6>Summary</h6>
+                        <div className="flex flex-col">
+                            <div>xx99mk2</div>
+                            <div>xx59</div>
+                            <div>yx1</div>
+                        </div>
+                        <div className="flex flex-col">
+                            <div>total</div>
+                            <div>shipping</div>
+                            <div>vat (included)</div>
+                            <div>grand total</div>
+                        </div>
+                        <button className="w-[10rem] h-[3rem] bg-orange-dark hover:bg-orange-light hover:cursor-pointer">
+                            <p className="subtitle text-white">
+                                Continue & Pay
+                            </p>
+                        </button>
                     </section>
                 </div>
             </LayoutContainer>
