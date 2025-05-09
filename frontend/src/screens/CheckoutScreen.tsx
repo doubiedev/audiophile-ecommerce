@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router";
 import LayoutContainer from "../components/LayoutContainer";
-import { useState } from "react";
-import BtnOrange from "../components/BtnOrange";
+import { useState, useEffect } from "react";
+import SummaryProductCard from "../components/SummaryProductCard";
+import data from "../data.json";
+import cart from "../cart.json";
 
 const CheckoutScreen = () => {
     const navigate = useNavigate();
@@ -10,6 +12,20 @@ const CheckoutScreen = () => {
         "w-full border border-[#cfcfcf] px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-dark";
     const labelClass = "block text-sm font-semibold mb-2";
     const [paymentMethod, setPaymentMethod] = useState("e-money");
+    const [subtotal, setSubtotal] = useState(0);
+
+    useEffect(() => {
+        let total = 0;
+
+        cart.forEach((cartItem) => {
+            const product = data.find((p) => p.id === cartItem.id);
+            if (product) {
+                total += cartItem.quantity * product.price;
+            }
+        });
+
+        setSubtotal(total);
+    }, []);
 
     return (
         <div className="w-full h-full bg-grey-dark pb-[140px]">
@@ -220,20 +236,45 @@ const CheckoutScreen = () => {
                             </div>
                         </form>
                     </section>
-                    <section className="flex flex-col w-[350px] h-[612px] bg-white p-[2rem]">
+                    <section className="flex flex-col w-[350px] h-[612px] bg-white p-[2rem] gap-[2rem]">
                         <h6>Summary</h6>
-                        <div className="flex flex-col">
-                            <div>xx99mk2</div>
-                            <div>xx59</div>
-                            <div>yx1</div>
+                        <div className="flex flex-col gap-[1.5rem]">
+                            <SummaryProductCard id={1} />
+                            <SummaryProductCard id={3} />
+                            <SummaryProductCard id={6} />
                         </div>
-                        <div className="flex flex-col">
-                            <div>total</div>
-                            <div>shipping</div>
-                            <div>vat (included)</div>
-                            <div>grand total</div>
+                        <div className="flex flex-col gap-[0.5rem]">
+                            <p className="flex justify-between">
+                                <p className="uppercase opacity-50">Total</p>
+                                <div className="font-bold text-[18px]">
+                                    $ {subtotal.toLocaleString()}
+                                </div>
+                            </p>
+                            <p className="flex justify-between">
+                                <p className="uppercase opacity-50">Shipping</p>
+                                <div className="font-bold text-[18px]">$50</div>
+                            </p>
+                            <p className="flex justify-between">
+                                <p className="uppercase opacity-50">
+                                    VAT (included)
+                                </p>
+                                <div className="font-bold text-[18px]">
+                                    ${" "}
+                                    {Math.round(
+                                        0.2 * subtotal,
+                                    ).toLocaleString()}
+                                </div>
+                            </p>
+                            <p className="mt-[1rem] flex justify-between">
+                                <p className="uppercase opacity-50">
+                                    Grand Total
+                                </p>
+                                <div className="font-bold text-[18px] text-orange-dark">
+                                    $ {(subtotal + 50).toLocaleString()}
+                                </div>
+                            </p>
                         </div>
-                        <button className="w-[10rem] h-[3rem] bg-orange-dark hover:bg-orange-light hover:cursor-pointer">
+                        <button className="h-[3rem] bg-orange-dark hover:bg-orange-light hover:cursor-pointer">
                             <p className="subtitle text-white">
                                 Continue & Pay
                             </p>
