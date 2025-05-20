@@ -1,12 +1,17 @@
 import { useNavigate } from "react-router";
+import { useNavbarUpdate } from "../contexts/NavbarContext";
 
-// FIX: Should close cart menu as well
 const BtnCheckout = () => {
     const navigate = useNavigate();
+    const { toggleCart } = useNavbarUpdate();
+
     return (
         <button
             className="h-[3rem] bg-orange-dark hover:bg-orange-light hover:cursor-pointer"
-            onClick={() => navigate("/checkout")}
+            onClick={() => {
+                toggleCart();
+                navigate("/checkout");
+            }}
         >
             <p className="subtitle text-white">Checkout</p>
         </button>
