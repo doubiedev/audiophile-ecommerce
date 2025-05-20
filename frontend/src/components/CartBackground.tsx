@@ -1,8 +1,8 @@
-import { useApp, useAppUpdate } from "../contexts/AppContext";
+import { useNavbar, useNavbarUpdate } from "../contexts/NavbarContext";
 
 const CartBackground = () => {
-    const { isCartOpen } = useApp();
-    const { toggleCart } = useAppUpdate();
+    const { isCartOpen } = useNavbar();
+    const { toggleCart } = useNavbarUpdate();
 
     return (
         <>

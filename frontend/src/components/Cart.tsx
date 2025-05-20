@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 import cart from "../cart.json";
 import data from "../data.json";
-import { useApp } from "../contexts/AppContext";
+import { useNavbar } from "../contexts/NavbarContext";
 import BtnAddToCart from "./BtnAddToCart";
 import BtnCheckout from "./BtnCheckout";
 
 const Cart = () => {
-    const { isCartOpen } = useApp();
+    const { isCartOpen } = useNavbar();
     const images = useMemo(
         () =>
             import.meta.glob("../assets/**/*.{jpg,png,jpeg,webp,svg}", {

@@ -6,12 +6,12 @@ import NavMenu from "../assets/shared/tablet/icon-hamburger.svg";
 import NavLinks from "./NavLinks";
 import { useNavigate } from "react-router";
 import Cart from "./Cart";
-import { useAppUpdate } from "../contexts/AppContext";
+import { useNavbarUpdate } from "../contexts/NavbarContext";
 
 // TODO: Hamburger menu dropdown
 
 const Navbar = () => {
-    const { toggleCart } = useAppUpdate();
+    const { toggleCart } = useNavbarUpdate();
 
     const navigate = useNavigate();
     const { isMobile, isTablet, isDesktop } = useResponsive();
