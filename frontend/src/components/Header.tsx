@@ -30,7 +30,7 @@ const Header = () => {
                 >
                     <LayoutContainer>
                         <Navbar />
-                        <section className="h-full flex justify-center lg:justify-baseline">
+                        <section className="h-full flex justify-center lg:justify-start">
                             <div className="text-white min-w-0 w-full max-w-[379px] h-full lg:flex-1 flex flex-col justify-center">
                                 <div className="flex flex-col gap-y-[40px] items-center lg:items-baseline">
                                     <div className="flex flex-col gap-y-[24px] items-center lg:items-baseline">
@@ -59,8 +59,6 @@ const Header = () => {
                                     </div>
                                 </div>
                             </div>
-                            {isDesktop && <div className="flex-1"></div>}
-                            {isDesktop && <div className="flex-1"></div>}
                         </section>
                     </LayoutContainer>
                 </header>
