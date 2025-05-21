@@ -6,7 +6,7 @@ import BtnAddToCart from "./BtnAddToCart";
 import BtnCheckout from "./BtnCheckout";
 
 const Cart = () => {
-    const { isCartOpen } = useNavbar();
+    const { isCartMenuOpen } = useNavbar();
     const images = useMemo(
         () =>
             import.meta.glob("../assets/**/*.{jpg,png,jpeg,webp,svg}", {
@@ -38,7 +38,7 @@ const Cart = () => {
 
     return (
         <>
-            {isCartOpen && (
+            {isCartMenuOpen && (
                 <section className="flex flex-col w-[377px] bg-white absolute top-[121px] md:top-[128px] right-0 p-[2rem] rounded-lg">
                     <div className="flex justify-between mb-[2rem]">
                         <h6>

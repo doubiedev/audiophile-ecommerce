@@ -11,7 +11,7 @@ import { useNavbarUpdate } from "../contexts/NavbarContext";
 // TODO: Hamburger menu dropdown
 
 const Navbar = () => {
-    const { toggleCart } = useNavbarUpdate();
+    const { toggleCartMenu } = useNavbarUpdate();
 
     const navigate = useNavigate();
     const { isMobile, isTablet, isDesktop } = useResponsive();
@@ -37,7 +37,10 @@ const Navbar = () => {
                     >
                         <Logo />
                     </div>
-                    <div className="hover:cursor-pointer" onClick={toggleCart}>
+                    <div
+                        className="hover:cursor-pointer"
+                        onClick={toggleCartMenu}
+                    >
                         <CartIcon />
                     </div>
                 </>
@@ -58,7 +61,10 @@ const Navbar = () => {
                             <Logo />
                         </div>
                     </div>
-                    <div className="hover:cursor-pointer" onClick={toggleCart}>
+                    <div
+                        className="hover:cursor-pointer"
+                        onClick={toggleCartMenu}
+                    >
                         <CartIcon />
                     </div>
                 </>
@@ -72,7 +78,10 @@ const Navbar = () => {
                         <Logo />
                     </div>
                     <NavLinks />
-                    <div className="hover:cursor-pointer" onClick={toggleCart}>
+                    <div
+                        className="hover:cursor-pointer"
+                        onClick={toggleCartMenu}
+                    >
                         <CartIcon />
                     </div>
                 </>

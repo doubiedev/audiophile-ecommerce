@@ -1,11 +1,11 @@
 import { useContext, createContext, useState } from "react";
 
 type NavbarContextType = {
-    isCartOpen: boolean;
+    isCartMenuOpen: boolean;
 };
 
 type NavbarUpdateContextType = {
-    toggleCart: () => void;
+    toggleCartMenu: () => void;
 };
 
 const NavbarContext = createContext<NavbarContextType | null>(null);
@@ -28,15 +28,15 @@ export const useNavbarUpdate = () => {
 };
 
 export const NavbarProvider = ({ children }: { children: React.ReactNode }) => {
-    const [isCartOpen, setIsCartOpen] = useState(false);
+    const [isCartMenuOpen, setIsCartMenuOpen] = useState(false);
 
-    const toggleCart = () => {
-        setIsCartOpen(!isCartOpen);
+    const toggleCartMenu = () => {
+        setIsCartMenuOpen(!isCartMenuOpen);
     };
 
     return (
-        <NavbarContext.Provider value={{ isCartOpen }}>
-            <NavbarUpdateContext.Provider value={{ toggleCart }}>
+        <NavbarContext.Provider value={{ isCartMenuOpen }}>
+            <NavbarUpdateContext.Provider value={{ toggleCartMenu }}>
                 {children}
             </NavbarUpdateContext.Provider>
         </NavbarContext.Provider>

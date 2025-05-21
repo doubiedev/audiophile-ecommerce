@@ -3,13 +3,13 @@ import { useNavbarUpdate } from "../contexts/NavbarContext";
 
 const BtnCheckout = () => {
     const navigate = useNavigate();
-    const { toggleCart } = useNavbarUpdate();
+    const { toggleCartMenu } = useNavbarUpdate();
 
     return (
         <button
             className="h-[3rem] bg-orange-dark hover:bg-orange-light hover:cursor-pointer"
             onClick={() => {
-                toggleCart();
+                toggleCartMenu();
                 navigate("/checkout");
             }}
         >
