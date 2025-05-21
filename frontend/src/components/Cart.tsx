@@ -1,41 +1,11 @@
-import { useMemo } from "react";
-import cart from "../cart.json";
-import data from "../data.json";
 import { useNavbar } from "../contexts/NavbarContext";
+import { useApp } from "../contexts/AppContext";
 import BtnAddToCart from "./BtnAddToCart";
 import BtnCheckout from "./BtnCheckout";
 
 const Cart = () => {
     const { isCartMenuOpen } = useNavbar();
-    const images = useMemo(
-        () =>
-            import.meta.glob("../assets/**/*.{jpg,png,jpeg,webp,svg}", {
-                eager: true,
-                import: "default",
-            }),
-        [],
-    );
-
-    const cartItems = cart
-        .map((cartItem) => {
-            const product = data.find((item) => item.id === cartItem.id);
-            if (!product) return null;
-
-            const imagePath = `../assets/${product.image.desktop}`;
-            const imageSrc = images[imagePath] as string;
-
-            return {
-                ...product,
-                quantity: cartItem.quantity,
-                imageSrc,
-            };
-        })
-        .filter((item): item is NonNullable<typeof item> => item !== null);
-
-    const total = cartItems.reduce((sum, item) => {
-        return sum + item.price * item.quantity;
-    }, 0);
-
+    const { cart, cartItems, total } = useApp();
     return (
         <>
             {isCartMenuOpen && (

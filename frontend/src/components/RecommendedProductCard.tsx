@@ -1,7 +1,6 @@
-import { useMemo } from "react";
-import data from "../data.json";
-import BtnOrange from "./BtnOrange";
+import { useApp } from "../contexts/AppContext";
 import { useNavigate } from "react-router";
+import BtnOrange from "./BtnOrange";
 
 interface RecProductProps {
     id: number;
@@ -9,16 +8,8 @@ interface RecProductProps {
 
 const RecommendedProductCard = ({ id }: RecProductProps) => {
     const navigate = useNavigate();
+    const { data, images } = useApp();
     const product = data.find((item) => item.id === id);
-
-    const images = useMemo(
-        () =>
-            import.meta.glob("../assets/**/*.{jpg,png,jpeg,webp,svg}", {
-                eager: true,
-                import: "default",
-            }),
-        [],
-    );
 
     if (!product) return <p>Product not found.</p>;
 

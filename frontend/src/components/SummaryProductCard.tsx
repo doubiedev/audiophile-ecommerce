@@ -1,23 +1,14 @@
-import { useMemo } from "react";
-import data from "../data.json";
-import cart from "../cart.json";
+import { useApp } from "../contexts/AppContext";
 
 interface SummaryProductCardProps {
     id: number;
 }
 
 const SummaryProductCard = ({ id }: SummaryProductCardProps) => {
+    const { cart, data, images } = useApp();
+
     const product = data.find((item) => item.id === id);
     const item = cart.find((item) => item.id === id);
-
-    const images = useMemo(
-        () =>
-            import.meta.glob("../assets/**/*.{jpg,png,jpeg,webp,svg}", {
-                eager: true,
-                import: "default",
-            }),
-        [],
-    );
 
     if (!product) return <p>Product not found.</p>;
     const productFullName = product.name + " " + product.category;

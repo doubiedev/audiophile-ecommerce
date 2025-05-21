@@ -1,7 +1,6 @@
-import { useMemo } from "react";
-import BtnOrange from "./BtnOrange";
-import data from "../data.json";
+import { useApp } from "../contexts/AppContext";
 import { useNavigate } from "react-router";
+import BtnOrange from "./BtnOrange";
 import BtnAddToCart from "./BtnAddToCart";
 
 interface ProductProps {
@@ -16,16 +15,8 @@ const ProductCard = ({
     isPurchasable = false,
 }: ProductProps) => {
     const navigate = useNavigate();
+    const { data, images } = useApp();
     const product = data.find((item) => item.id === id);
-
-    const images = useMemo(
-        () =>
-            import.meta.glob("../assets/**/*.{jpg,png,jpeg,webp,svg}", {
-                eager: true,
-                import: "default",
-            }),
-        [],
-    );
 
     if (!product) return <p>Product not found.</p>;
     const productFullName = product.name + " " + product.category;
@@ -42,7 +33,7 @@ const ProductCard = ({
             )}
 
             <div className="flex-1">
-                {product.isNewProduct && (
+                {product.new === true && (
                     <p className="overline text-orange-dark mb-[1rem]">
                         New Product
                     </p>

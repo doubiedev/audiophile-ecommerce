@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router";
 import { ResponsiveProvider } from "./contexts/ResponsiveContext";
 import { NavbarProvider } from "./contexts/NavbarContext";
+import { AppProvider } from "./contexts/AppContext";
 import HomeScreen from "./screens/HomeScreen";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import ProductScreen from "./screens/ProductScreen";
@@ -11,21 +12,25 @@ import CheckoutScreen from "./screens/CheckoutScreen";
 
 const App = () => {
     return (
-        <ResponsiveProvider>
-            <NavbarProvider>
-                <CartBackground />
-                <Header />
-            </NavbarProvider>
-            <Routes>
-                <Route path="/" element={<HomeScreen />} />
-                <Route path="/headphones" element={<CategoriesScreen />} />
-                <Route path="/speakers" element={<CategoriesScreen />} />
-                <Route path="/earphones" element={<CategoriesScreen />} />
-                <Route path="/products/:id" element={<ProductScreen />} />
-                <Route path="/checkout" element={<CheckoutScreen />} />
-            </Routes>
-            <Footer />
-        </ResponsiveProvider>
+        <AppProvider>
+            <ResponsiveProvider>
+                <NavbarProvider>
+                    <CartBackground />
+                    <Header />
+                </NavbarProvider>
+
+                <Routes>
+                    <Route path="/" element={<HomeScreen />} />
+                    <Route path="/headphones" element={<CategoriesScreen />} />
+                    <Route path="/speakers" element={<CategoriesScreen />} />
+                    <Route path="/earphones" element={<CategoriesScreen />} />
+                    <Route path="/products/:id" element={<ProductScreen />} />
+                    <Route path="/checkout" element={<CheckoutScreen />} />
+                </Routes>
+
+                <Footer />
+            </ResponsiveProvider>
+        </AppProvider>
     );
 };
 
