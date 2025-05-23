@@ -2,24 +2,17 @@ import LayoutContainer from "../components/LayoutContainer";
 import Categories from "../components/Categories";
 import BestGear from "../components/BestGear";
 import { useParams, useNavigate } from "react-router";
-import data from "../data.json";
-import { useMemo } from "react";
+import { useApp } from "../contexts/AppContext";
 import ProductCard from "../components/ProductCard";
 import RecommendedProductCard from "../components/RecommendedProductCard";
+import { Product } from "../contexts/AppContext";
 
 const ProductScreen = () => {
     const navigate = useNavigate();
+    const { data, images } = useApp()
     const { id } = useParams();
     const productId = parseInt(id as string);
-    const product = data.find((item) => item.id === productId);
-    const images = useMemo(
-        () =>
-            import.meta.glob("../assets/**/*.{jpg,png,jpeg,webp,svg}", {
-                eager: true,
-                import: "default",
-            }),
-        [],
-    );
+    const product = data.find((item) => item.id === productId) as Product | undefined;
 
     if (!product) return <p>Product not found.</p>;
 
@@ -49,16 +42,20 @@ const ProductScreen = () => {
                     <div className="flex flex-col gap-[2rem] w-[350px]">
                         <h3>In the box</h3>
                         <div className="flex flex-col gap-[0.5rem]">
-                            {product.inTheBox.map((item, idx) => (
-                                <div className="flex" key={idx}>
-                                    <div className="w-[39px]">
-                                        <p className="text-orange-dark text-bold">
-                                            {item.quantity}x&nbsp;
-                                        </p>
+                            {Array.isArray(product.inTheBox) && product.inTheBox.length > 0 ? (
+                                product.inTheBox.map((item, idx) => (
+                                    <div className="flex" key={idx}>
+                                        <div className="w-[39px]">
+                                            <p className="text-orange-dark font-bold">
+                                                {item.quantity}x&nbsp;
+                                            </p>
+                                        </div>
+                                        <p className="opacity-50">{item.item}</p>
                                     </div>
-                                    <p className="opacity-50">{item.item}</p>
-                                </div>
-                            ))}
+                                ))
+                            ) : (
+                                <p className="opacity-50">No included items.</p>
+                            )}
                         </div>
                     </div>
                 </div>

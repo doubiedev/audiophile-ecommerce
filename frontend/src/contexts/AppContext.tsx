@@ -9,39 +9,21 @@ type CartItem = {
 
 export type Product = {
     id: number;
-    slug: string;
+    category: string;
+    isNewProduct: boolean;
     name: string;
+    description: string;
+    price: number;
+    features: string;
+    inTheBox: { quantity: number; item: string }[];
+    recommended: number[];
+    url: string;
     image: {
         mobile: string;
         tablet: string;
         desktop: string;
+        showcases: string[];
     };
-    category: string;
-    categoryImage: {
-        mobile: string;
-        tablet: string;
-        desktop: string;
-    };
-    new: boolean;
-    price: number;
-    description: string;
-    features: string;
-    includes: { quantity: number; item: string }[];
-    gallery: {
-        first: Record<"mobile" | "tablet" | "desktop", string>;
-        second: Record<"mobile" | "tablet" | "desktop", string>;
-        third: Record<"mobile" | "tablet" | "desktop", string>;
-    };
-    others: {
-        id: number;
-        slug: string;
-        name: string;
-        image: {
-            mobile: string;
-            tablet: string;
-            desktop: string;
-        };
-    }[];
 };
 
 type CartProduct = Product & {
