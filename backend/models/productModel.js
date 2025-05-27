@@ -22,7 +22,8 @@ const productSchema = new Schema({
     inTheBox: [inTheBoxSchema],
     recommended: [{
         type: Schema.Types.ObjectId,
-        ref: 'Product'
+        ref: 'Product',
+        required: false
     }],
     url: { type: String, required: true },
     image: { type: imageSchema, required: true }
