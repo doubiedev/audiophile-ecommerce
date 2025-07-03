@@ -13,8 +13,16 @@ db.createUser({
 
 db.createCollection("products");
 
+const headphone1 = ObjectId("6865e7fc8a134f27aa8b183a");
+const headphone2 = ObjectId("6865e804001dc027c015abc2");
+const headphone3 = ObjectId("6865e80663114b6e24d5db44");
+const speaker1 = ObjectId("6865e807cf2b2a4439b2d2f6");
+const speaker2 = ObjectId("6865e808562c0b5a34bf4d98");
+const earphone1 = ObjectId("6865e80907e23949aab4d84a");
+
 db.products.insertMany([
     {
+        _id: headphone1,
         category: "headphones",
         isNewProduct: true,
         name: "XX99 Mark II",
@@ -31,7 +39,7 @@ db.products.insertMany([
             { "quantity": 1, "item": "3.5mm 5m audio cable" },
             { "quantity": 1, "item": "Travel bag" }
         ],
-        recommended: [],
+        recommended: [headphone2, headphone3, speaker1],
         url: "/headphones/xx99-mark-two-headphones",
         image: {
             desktop: "product-xx99-mark-two-headphones/desktop/image-category-page-preview.jpg",
@@ -45,6 +53,7 @@ db.products.insertMany([
         }
     },
     {
+        _id: headphone2,
         category: "headphones",
         isNewProduct: false,
         name: "XX99 Mark I",
@@ -60,7 +69,7 @@ db.products.insertMany([
             { quantity: 1, "item": "User manual" },
             { quantity: 1, "item": "3.5mm 5m audio cable" }
         ],
-        recommended: [],
+        recommended: [headphone1, headphone3, speaker1],
         url: "/headphones/xx99-mark-one-headphones",
         image: {
             desktop: "product-xx99-mark-one-headphones/desktop/image-category-page-preview.jpg",
@@ -74,6 +83,7 @@ db.products.insertMany([
         }
     },
     {
+        _id: headphone3,
         category: "headphones",
         isNewProduct: false,
         name: "XX59",
@@ -89,7 +99,7 @@ db.products.insertMany([
             { "quantity": 1, "item": "User manual" },
             { "quantity": 1, "item": "3.5mm 5m audio cable" }
         ],
-        recommended: [],
+        recommended: [headphone1, headphone2, speaker1],
         url: "/headphones/xx59-headphones",
         image: {
             desktop: "product-xx59-headphones/desktop/image-category-page-preview.jpg",
@@ -103,6 +113,7 @@ db.products.insertMany([
         }
     },
     {
+        _id: speaker1,
         category: "speakers",
         isNewProduct: true,
         name: "ZX9",
@@ -119,7 +130,7 @@ db.products.insertMany([
             { "quantity": 1, "item": "3.5mm 10m audio cable" },
             { "quantity": 1, "item": "10m optical cable" }
         ],
-        recommended: [],
+        recommended: [speaker2, headphone2, headphone3],
         url: "/speakers/zx9-speaker",
         image: {
             desktop: "product-zx9-speaker/desktop/image-category-page-preview.jpg",
@@ -133,6 +144,7 @@ db.products.insertMany([
         }
     },
     {
+        _id: speaker2,
         category: "speakers",
         isNewProduct: false,
         name: "ZX7",
@@ -149,7 +161,7 @@ db.products.insertMany([
             { "quantity": 1, "item": "3.5mm 7.5m audio cable" },
             { "quantity": 1, "item": "7.5m optical cable" }
         ],
-        recommended: [],
+        recommended: [speaker1, headphone2, headphone3],
         url: "/speakers/zx7-speaker",
         image: {
             desktop: "product-zx7-speaker/desktop/image-category-page-preview.jpg",
@@ -163,6 +175,7 @@ db.products.insertMany([
         }
     },
     {
+        _id: earphone1,
         category: "earphones",
         isNewProduct: true,
         name: "YX1",
@@ -179,7 +192,7 @@ db.products.insertMany([
             { "quantity": 1, "item": "USB-C charging cable" },
             { "quantity": 1, "item": "Travel pouch" }
         ],
-        recommended: [],
+        recommended: [headphone2, headphone3, speaker1],
         url: "/earphones/yx1-earphones",
         image: {
             desktop: "product-yx1-earphones/desktop/image-category-page-preview.jpg",

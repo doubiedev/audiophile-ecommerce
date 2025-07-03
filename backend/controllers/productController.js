@@ -3,7 +3,7 @@ import Product from '../models/productModel.js';
 
 // @desc    Create product
 // @route   POST /api/products
-// @access  Private
+// @access  Public
 const createProduct = asyncHandler(async (req, res) => {
     const { category, isNewProduct, name, description, price, features, inTheBox, recommended, url, image } = req.body;
 
@@ -42,7 +42,7 @@ const createProduct = asyncHandler(async (req, res) => {
 
 // @desc    Get all products
 // @route   GET /api/products
-// @access  Private
+// @access  Public
 
 const getAllProducts = asyncHandler(async (req, res) => {
     const page = Number(req.query.page) || 1;
@@ -68,7 +68,7 @@ const getAllProducts = asyncHandler(async (req, res) => {
 
 // @desc    Get single product
 // @route   GET /api/products/:id
-// @access  Private
+// @access  Public
 
 const getProduct = asyncHandler(async (req, res) => {
     const { id } = req.params;
@@ -84,7 +84,7 @@ const getProduct = asyncHandler(async (req, res) => {
 
 // @desc    Update product
 // @route   PUT /api/products/:id
-// @access  Private
+// @access  Public
 
 const updateProduct = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
@@ -124,7 +124,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 
 // @desc    Delete product
 // @route   DELETE /api/products/:id
-// @access  Private
+// @access  Public
 
 const deleteProduct = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
