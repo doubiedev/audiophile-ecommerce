@@ -1,9 +1,10 @@
-import { useContext, createContext, useMemo } from "react";
-import rawCart from "../cart.json";
+import { useContext, createContext, useMemo, useState } from "react";
+// import rawCart from "../cart.json";
 import rawData from "../data.json";
+// const rawCart = {};
 
 type CartItem = {
-    id: number;
+    productId: number;
     quantity: number;
 };
 
@@ -14,7 +15,7 @@ export type Product = {
     name: string;
     description: string;
     price: number;
-    features: string;
+    features: string[];
     inTheBox: { quantity: number; item: string }[];
     recommended: number[];
     url: string;
@@ -39,7 +40,10 @@ type AppContextType = {
     data: Product[];
 };
 
-type AppUpdateContextType = {}; // Extend when needed (e.g. add/remove item)
+type AppUpdateContextType = {
+    addProductToCart: (productId: number, quantity: number) => void;
+    clearCart: () => void;
+}; // Extend when needed (e.g. add/remove item)
 
 const AppContext = createContext<AppContextType | null>(null);
 const AppUpdateContext = createContext<AppUpdateContextType | null>(null);
@@ -61,8 +65,6 @@ export const useAppUpdate = () => {
 };
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
-    const cart = rawCart as CartItem[];
-    // BUG: Type conversion error?
     const data = rawData as Product[];
 
     const images = useMemo(
@@ -74,9 +76,59 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         [],
     );
 
+    const initialCart: CartItem[] = [
+        {
+            productId: 1,
+            quantity: 1,
+        },
+        {
+            productId: 3,
+            quantity: 2,
+        },
+        {
+            productId: 6,
+            quantity: 1,
+        },
+    ];
+    const [cart, setCart] = useState(initialCart);
+
+    const addProductToCart = (productId: number, quantity: number) => {
+        setCart((prevCart) => {
+            const existingItem = prevCart.find(
+                (item) => item.productId === productId,
+            );
+
+            if (existingItem) {
+                const newQuantity = existingItem.quantity + quantity;
+
+                // Remove item if quantity is 0 or less
+                if (newQuantity <= 0) {
+                    return prevCart.filter(
+                        (item) => item.productId !== productId,
+                    );
+                }
+
+                return prevCart.map((item) =>
+                    item.productId === productId
+                        ? { ...item, quantity: newQuantity }
+                        : item,
+                );
+            }
+
+            // Don't add if quantity is 0 or less
+            if (quantity <= 0) return prevCart;
+
+            return [...prevCart, { productId, quantity }];
+        });
+    };
+
+    const clearCart = () => {
+        setCart([]);
+    };
+
     const cartItems: CartProduct[] = cart
         .map((cartItem) => {
-            const product = data.find((item) => item.id === cartItem.id);
+            const product = data.find((item) => item.id === cartItem.productId);
             if (!product) return null;
 
             // Normalize the path (strip "./" and make relative to the import.meta.glob root)
@@ -97,7 +149,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <AppContext.Provider value={{ cart, cartItems, data, images, total }}>
-            <AppUpdateContext.Provider value={{}}>
+            <AppUpdateContext.Provider value={{ addProductToCart, clearCart }}>
                 {children}
             </AppUpdateContext.Provider>
         </AppContext.Provider>

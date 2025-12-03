@@ -1,33 +1,28 @@
 import { useNavigate } from "react-router";
 import LayoutContainer from "../components/LayoutContainer";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import SummaryProductCard from "../components/SummaryProductCard";
-import data from "../data.json";
-import cart from "../cart.json";
 import Tick from "../assets/checkout/icon-order-confirmation.svg";
+import { useApp } from "../contexts/AppContext";
 
 const CheckoutScreen = () => {
     const navigate = useNavigate();
+    const { cartItems } = useApp();
+
+    const [paymentMethod, setPaymentMethod] = useState("e-money");
+    const [isOrderSuccessful, setIsOrderSuccessful] = useState(false);
 
     const halfWidthClass =
         "w-full border border-[#cfcfcf] px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-dark";
     const labelClass = "block text-sm font-semibold mb-2";
-    const [paymentMethod, setPaymentMethod] = useState("e-money");
-    const [subtotal, setSubtotal] = useState(0);
-    const [isOrderSuccessful, setIsOrderSuccessful] = useState(false);
 
-    useEffect(() => {
-        let total = 0;
-
-        cart.forEach((cartItem) => {
-            const product = data.find((p) => p.id === cartItem.id);
-            if (product) {
-                total += cartItem.quantity * product.price;
-            }
-        });
-
-        setSubtotal(total);
-    }, []);
+    // Calculate subtotal from context cartItems
+    const subtotal = useMemo(() => {
+        return cartItems.reduce(
+            (sum, item) => sum + item.price * item.quantity,
+            0,
+        );
+    }, [cartItems]);
 
     return (
         <>
@@ -265,9 +260,12 @@ const CheckoutScreen = () => {
                         <section className="flex flex-col w-[350px] h-[612px] bg-white p-[2rem] gap-[2rem]">
                             <h6>Summary</h6>
                             <div className="flex flex-col gap-[1.5rem]">
-                                <SummaryProductCard id={1} />
-                                <SummaryProductCard id={3} />
-                                <SummaryProductCard id={6} />
+                                {cartItems.map((item) => (
+                                    <SummaryProductCard
+                                        key={item.id}
+                                        id={item.id}
+                                    />
+                                ))}
                             </div>
                             <div className="flex flex-col gap-[0.5rem]">
                                 <div className="flex justify-between">
@@ -325,11 +323,9 @@ const CheckoutScreen = () => {
 interface OrderConfirmationProps {
     subtotal: number;
 }
-
 const OrderConfirmation = ({ subtotal }: OrderConfirmationProps) => {
     const navigate = useNavigate();
-    const firstCartItem = cart[0];
-    const product = data.find((item) => item.id === firstCartItem.id);
+    const { cartItems } = useApp();
 
     const images = useMemo(
         () =>
@@ -340,10 +336,12 @@ const OrderConfirmation = ({ subtotal }: OrderConfirmationProps) => {
         [],
     );
 
-    if (!product) return <p>Product not found.</p>;
-    const productFullName = product.name + " " + product.category;
+    if (cartItems.length === 0) return <p>No items in cart.</p>;
 
-    const imagePath = `../assets/${product.image.desktop}`;
+    const firstItem = cartItems[0];
+    const productFullName = firstItem.name + " " + firstItem.category;
+
+    const imagePath = `../assets/${firstItem.image.desktop}`;
     const imageSrc = images[imagePath] as string;
 
     return (
@@ -373,24 +371,22 @@ const OrderConfirmation = ({ subtotal }: OrderConfirmationProps) => {
                                 <div className="flex flex-col w-full ml-[1rem]">
                                     <div className="flex justify-between text-center">
                                         <p className="text-bold uppercase">
-                                            {product.name}
+                                            {firstItem.name}
                                         </p>
                                         <div className="opacity-50 font-bold text-[15px]">
-                                            x
-                                            {firstCartItem &&
-                                                firstCartItem.quantity}
+                                            x{firstItem.quantity}
                                         </div>
                                     </div>
                                     <div className="opacity-50 text-[14px] font-bold uppercase">
-                                        $ {product.price.toLocaleString()}
+                                        $ {firstItem.price.toLocaleString()}
                                     </div>
                                 </div>
                             </div>
-                            {cart.length > 1 && (
+                            {cartItems.length > 1 && (
                                 <>
                                     <div className="h-[1px] w-full bg-black opacity-[8%] my-[0.75rem]"></div>
                                     <div className="text-[12px] opacity-50 font-bold text-center">
-                                        and {cart.length - 1} other item(s)
+                                        and {cartItems.length - 1} other item(s)
                                     </div>
                                 </>
                             )}

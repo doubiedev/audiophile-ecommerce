@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { useAppUpdate } from "../contexts/AppContext";
 
 interface BtnAddToCartProps {
     smallBtn?: boolean;
 }
 
 const BtnAddToCart: React.FC<BtnAddToCartProps> = ({ smallBtn = false }) => {
-    const [numItems, setNumItems] = useState(1);
+    const [quantity, setQuantity] = useState(1);
+    const { addProductToCart } = useAppUpdate();
 
     return (
         <div className={`${!smallBtn && "flex gap-[1rem]"}`}>
@@ -14,20 +16,29 @@ const BtnAddToCart: React.FC<BtnAddToCartProps> = ({ smallBtn = false }) => {
             >
                 <div
                     className="flex justify-center flex-1 hover:cursor-pointer opacity-25 select-none"
-                    onClick={() => setNumItems(Math.max(numItems - 1, 1))}
+                    onClick={() => setQuantity(Math.max(quantity - 1, 1))}
                 >
                     -
                 </div>
-                <p className="flex justify-center flex-1">{numItems}</p>
+                <p className="flex justify-center flex-1">{quantity}</p>
                 <p
                     className="flex justify-center flex-1 hover:cursor-pointer opacity-25 select-none"
-                    onClick={() => setNumItems(numItems + 1)}
+                    onClick={() => setQuantity(quantity + 1)}
                 >
                     +
                 </p>
             </div>
             {!smallBtn && (
-                <button className="w-[10rem] h-[3rem] bg-orange-dark hover:bg-orange-light hover:cursor-pointer">
+                <button
+                    className="w-[10rem] h-[3rem] bg-orange-dark hover:bg-orange-light hover:cursor-pointer"
+                    onClick={() => {
+                        const urlSections = location.pathname.split("/");
+                        const productId = parseInt(
+                            urlSections[urlSections.length - 1],
+                        );
+                        addProductToCart(productId, quantity);
+                    }}
+                >
                     <p className="subtitle text-white">Add To Cart</p>
                 </button>
             )}

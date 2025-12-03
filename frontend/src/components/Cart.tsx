@@ -1,11 +1,13 @@
 import { useNavbar } from "../contexts/NavbarContext";
-import { useApp } from "../contexts/AppContext";
-import BtnAddToCart from "./BtnAddToCart";
+import { useApp, useAppUpdate } from "../contexts/AppContext";
+import BtnCartQuantity from "./BtnCartQuantity";
 import BtnCheckout from "./BtnCheckout";
 
 const Cart = () => {
     const { isCartMenuOpen } = useNavbar();
     const { cart, cartItems, total } = useApp();
+    const { clearCart } = useAppUpdate();
+
     return (
         <>
             {isCartMenuOpen && (
@@ -15,7 +17,10 @@ const Cart = () => {
                             CART (<span>{cart.length}</span>)
                         </h6>
                         {/* TODO: Onclick: remove items from cart */}
-                        <p className="opacity-50 underline hover:cursor-pointer">
+                        <p
+                            className="opacity-50 underline hover:cursor-pointer"
+                            onClick={() => clearCart()}
+                        >
                             Remove all
                         </p>
                     </div>
@@ -39,7 +44,7 @@ const Cart = () => {
                                             ).toLocaleString()}
                                         </p>
                                     </div>
-                                    <BtnAddToCart smallBtn={true} />
+                                    <BtnCartQuantity productId={product.id} />
                                 </div>
                             </div>
                         ))}

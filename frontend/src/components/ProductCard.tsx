@@ -33,7 +33,7 @@ const ProductCard = ({
             )}
 
             <div className="flex-1">
-                {product.new === true && (
+                {product.isNewProduct && (
                     <p className="overline text-orange-dark mb-[1rem]">
                         New Product
                     </p>

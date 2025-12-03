@@ -8,7 +8,7 @@ const SummaryProductCard = ({ id }: SummaryProductCardProps) => {
     const { cart, data, images } = useApp();
 
     const product = data.find((item) => item.id === id);
-    const item = cart.find((item) => item.id === id);
+    const item = cart.find((item) => item.productId === id);
 
     if (!product) return <p>Product not found.</p>;
     const productFullName = product.name + " " + product.category;
