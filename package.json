@@ -7,13 +7,16 @@
         "client": "npm run dev --prefix frontend",
         "dev": "concurrently \"npm run server\" \"npm run client\"",
         "start": "node --env-file .env dist/index.js",
-        "build": "tsc",
+        "build": "tsc -p tsconfig.build.json",
+        "test": "vitest",
+        "test:run": "vitest --run",
+        "test:ui": "vitest --ui",
+        "coverage": "vitest run --coverage",
         "type-check": "tsc --noEmit",
         "lint": "eslint .",
         "lint:fix": "eslint --fix .",
         "format": "prettier --write .",
-        "format:check": "prettier --check .",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "format:check": "prettier --check ."
     },
     "imports": {
         "#*": "./src/*"
@@ -44,12 +47,15 @@
         "@tsconfig/node24": "^24.0.4",
         "@types/express": "^5.0.6",
         "@types/node": "^25.5.0",
+        "@vitest/coverage-v8": "^4.1.0",
+        "@vitest/eslint-plugin": "^1.6.12",
         "concurrently": "^9.1.2",
         "eslint": "^10.0.3",
         "eslint-plugin-perfectionist": "^5.6.0",
         "prettier": "^3.8.1",
         "tsx": "^4.21.0",
         "typescript": "^5.9.3",
-        "typescript-eslint": "^8.57.0"
+        "typescript-eslint": "^8.57.0",
+        "vitest": "^4.1.0"
     }
 }
