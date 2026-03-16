@@ -20,6 +20,7 @@ Audiophile is a responsive, multi-page e-commerce application built with React, 
 ## 📚 Acknowledgements
 - Frontend Mentor for the original design challenge.
 - React, TypeScript, Tailwind CSS, and Vite for the development tools.
+- [This medium article](https://medium.com/@gabrieldrouin/node-js-2025-guide-how-to-setup-express-js-with-typescript-eslint-and-prettier-b342cd21c30d) by Gabriel Drouin
 
 ## 📋 Future Improvements
 - User authentication and protected routes

@@ -1,38 +1,55 @@
 {
-  "name": "audiophile-ecommerce",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node backend/server.js",
-    "server": "nodemon backend/server.js",
-    "client": "npm run dev --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/doubiedev/audiophile-ecommerce.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
-  "bugs": {
-    "url": "https://github.com/doubiedev/audiophile-ecommerce/issues"
-  },
-  "homepage": "https://github.com/doubiedev/audiophile-ecommerce#readme",
-  "dependencies": {
-    "bcryptjs": "^3.0.2",
-    "cookie-parser": "^1.4.7",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "express-async-handler": "^1.2.0",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.12.1"
-  },
-  "devDependencies": {
-    "concurrently": "^9.1.2",
-    "nodemon": "^3.1.9",
-    "ts-node": "^10.9.2"
-  }
+    "name": "audiophile-ecommerce",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "server": "tsx --watch --env-file .env src/index.ts",
+        "client": "npm run dev --prefix frontend",
+        "dev": "concurrently \"npm run server\" \"npm run client\"",
+        "start": "node --env-file .env dist/index.js",
+        "build": "tsc",
+        "type-check": "tsc --noEmit",
+        "lint": "eslint .",
+        "lint:fix": "eslint --fix .",
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "imports": {
+        "#*": "./src/*"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/doubiedev/audiophile-ecommerce.git"
+    },
+    "keywords": [],
+    "author": "Nicholas Doublet",
+    "license": "ISC",
+    "type": "module",
+    "bugs": {
+        "url": "https://github.com/doubiedev/audiophile-ecommerce/issues"
+    },
+    "homepage": "https://github.com/doubiedev/audiophile-ecommerce#readme",
+    "dependencies": {
+        "bcryptjs": "^3.0.2",
+        "cookie-parser": "^1.4.7",
+        "dotenv": "^17.3.1",
+        "express": "^5.2.1",
+        "express-async-handler": "^1.2.0",
+        "jsonwebtoken": "^9.0.2",
+        "mongoose": "^9.3.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@tsconfig/node24": "^24.0.4",
+        "@types/express": "^5.0.6",
+        "@types/node": "^25.5.0",
+        "concurrently": "^9.1.2",
+        "eslint": "^10.0.3",
+        "eslint-plugin-perfectionist": "^5.6.0",
+        "prettier": "^3.8.1",
+        "tsx": "^4.21.0",
+        "typescript": "^5.9.3",
+        "typescript-eslint": "^8.57.0"
+    }
 }
