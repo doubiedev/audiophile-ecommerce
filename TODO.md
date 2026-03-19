@@ -1,6 +1,7 @@
 # Audiophile Ecommerce
 
 ## Todo
+
 - [ ] Responsive design -> mobile/tablet (after completing rest of desktop functionality)
 - [ ] Navbar dropdown hamburger menu
 - [ ] Homescreen black "see product" buttons
@@ -10,7 +11,7 @@
 - [ ] Disable text highlighting for incrementing/decrementing products to add to cart
 
 ## Work in progress
-- [ ] Shopping cart menu
 
+- [ ] Shopping cart menu
 
 ## Done

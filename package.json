@@ -44,30 +44,30 @@
     },
     "homepage": "https://github.com/doubiedev/audiophile-ecommerce#readme",
     "dependencies": {
-        "bcryptjs": "^3.0.2",
-        "cookie-parser": "^1.4.7",
-        "dotenv": "^17.3.1",
+        "argon2": "^0.44.0",
         "express": "^5.2.1",
         "express-async-handler": "^1.2.0",
-        "jsonwebtoken": "^9.0.2",
-        "mongoose": "^9.3.0"
+        "jsonwebtoken": "^9.0.3",
+        "mongoose": "^9.3.0",
+        "zod": "^4.3.6"
     },
     "devDependencies": {
-        "@eslint/js": "^10.0.1",
+        "@eslint/js": "9.39.4",
         "@tsconfig/node24": "^24.0.4",
         "@types/express": "^5.0.6",
+        "@types/jsonwebtoken": "^9.0.10",
         "@types/node": "^25.5.0",
         "@vitest/coverage-v8": "^4.1.0",
         "@vitest/eslint-plugin": "^1.6.12",
         "concurrently": "^9.1.2",
-        "eslint": "^10.0.3",
+        "eslint": "9.39.4",
         "eslint-plugin-perfectionist": "^5.6.0",
         "husky": "^9.1.7",
         "lint-staged": "^16.4.0",
         "prettier": "^3.8.1",
         "tsx": "^4.21.0",
         "typescript": "^5.9.3",
-        "typescript-eslint": "^8.57.0",
+        "typescript-eslint": "^8.57.1",
         "vitest": "^4.1.0"
     }
 }

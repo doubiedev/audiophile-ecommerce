@@ -1,13 +1,14 @@
 // @ts-check
 
 import eslint from "@eslint/js";
+import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
 import perfectionist from "eslint-plugin-perfectionist";
 import vitest from "@vitest/eslint-plugin";
 
-export default tseslint.config(
+export default defineConfig(
     {
-        ignores: ["**/*.js"],
+        ignores: ["**/*.js", "frontend/**"],
     },
     eslint.configs.recommended,
     tseslint.configs.strictTypeChecked,
@@ -18,6 +19,16 @@ export default tseslint.config(
                 projectService: true,
                 tsconfigRootDir: import.meta.dirname,
             },
+        },
+        rules: {
+            "@typescript-eslint/no-unused-vars": [
+                "error",
+                {
+                    argsIgnorePattern: "^_",
+                    varsIgnorePattern: "^_",
+                    caughtErrorsIgnorePattern: "^_",
+                },
+            ],
         },
     },
     perfectionist.configs["recommended-natural"],
