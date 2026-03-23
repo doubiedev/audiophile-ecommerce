@@ -1,4 +1,4 @@
-import mongoose, { InferSchemaType, Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 interface IUser {
     createdAt: Date;
@@ -11,7 +11,7 @@ interface IUser {
 const userSchema = new Schema<IUser>(
     {
         email: { maxLength: 256, required: true, type: String, unique: true },
-        hashedPassword: { default: "unset", maxLength: 256, required: true, type: String },
+        hashedPassword: { maxLength: 256, required: true, type: String },
         name: { required: true, type: String },
 
         // TODO: add cart & cartschema to attach to users
@@ -29,9 +29,8 @@ const userSchema = new Schema<IUser>(
     },
 );
 
-export type NewUser = Omit<UserType, "createdAt" | "updatedAt">;
-export type UserResponse = Omit<UserType, "_id" | "hashedPassword"> & { createdAt: Date; id: string; updatedAt: Date };
-export type UserType = InferSchemaType<typeof userSchema>;
+export type NewUser = Omit<IUser, "createdAt" | "updatedAt">;
+export type UserResponse = Omit<IUser, "hashedPassword"> & { id: string };
 
 const User = mongoose.model("User", userSchema);
 export default User;

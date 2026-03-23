@@ -1,14 +1,10 @@
+import { config } from "#config/config.js";
+import errorMiddleware from "#middleware/error.middleware.js";
+import middlewareLogResponse from "#middleware/logging.middleware.js";
+import authRoutes from "#routes/auth.routes.js";
+import userRoutes from "#routes/user.routes.js";
 import express, { type Request, type Response } from "express";
 import path from "path";
-
-import errorMiddleware from "./api/middleware/errorMiddleware.js";
-import middlewareLogResponse from "./api/middleware/loggingMiddleware.js";
-import { config } from "./config.js";
-import connectDB from "./db/db.js";
-import authRoutes from "./db/routes/authRoutes.js";
-import userRoutes from "./db/routes/userRoutes.js";
-
-await connectDB();
 
 const app = express();
 
@@ -21,7 +17,6 @@ app.use("/api/users", userRoutes);
 if (config.api.platform === "prod") {
     const __dirname = path.resolve();
     app.use(express.static(path.join(__dirname, "frontend/dist")));
-
     app.get("*", (_: Request, res: Response) => {
         res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
     });
@@ -31,6 +26,4 @@ if (config.api.platform === "prod") {
 
 app.use(errorMiddleware);
 
-app.listen(config.api.port, () => {
-    console.log(`Server started on port ${config.api.port.toString()}`);
-});
+export default app;

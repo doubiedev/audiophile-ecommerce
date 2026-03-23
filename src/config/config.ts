@@ -20,8 +20,6 @@ interface JWTConfig {
     secret: string;
 }
 
-process.loadEnvFile();
-
 function envOrThrow(key: string) {
     const value = process.env[key];
     if (!value) {
@@ -39,9 +37,9 @@ export const config: Config = {
         url: envOrThrow("DB_URL"),
     },
     jwt: {
-        defaultDuration: 60 * 60, // 1 hour in seconds
+        defaultDuration: 60 * 60, // 1 hour in seconds (JWT Unix timestamp offset)
         issuer: "audiophile",
-        refreshDuration: 60 * 60 * 24 * 60 * 1000, // 60 days in milliseconds
+        refreshDuration: 60 * 60 * 24 * 60 * 1000, // 60 days in milliseconds (Date.now() offset)
         secret: envOrThrow("JWT_SECRET"),
     },
 };

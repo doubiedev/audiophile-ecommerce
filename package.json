@@ -3,10 +3,10 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "server": "tsx --watch --env-file .env src/index.ts",
+        "server": "tsx --watch --env-file .env src/server.ts",
         "client": "npm run dev --prefix frontend",
         "dev": "concurrently \"npm run server\" \"npm run client\"",
-        "start": "node --env-file .env dist/index.js",
+        "start": "node --env-file .env dist/server.js",
         "build": "tsc -p tsconfig.build.json",
         "test": "vitest",
         "test:run": "vitest --run",
@@ -46,7 +46,6 @@
     "dependencies": {
         "argon2": "^0.44.0",
         "express": "^5.2.1",
-        "express-async-handler": "^1.2.0",
         "jsonwebtoken": "^9.0.3",
         "mongoose": "^9.3.0",
         "zod": "^4.3.6"
