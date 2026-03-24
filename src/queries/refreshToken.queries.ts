@@ -1,7 +1,6 @@
-import type User from "#models/user.model.js";
-
 import { config } from "#config/config.js";
 import RefreshToken from "#models/refreshToken.model.js";
+import { getUserById } from "#services/user.service.js";
 
 export async function dbDeleteRefreshTokensForUser(userId: string) {
     return RefreshToken.deleteMany({ userId });
@@ -12,13 +11,20 @@ export async function dbGetUserForRefreshToken(token: string) {
         expiresAt: { $gt: new Date() },
         revokedAt: null,
         token,
-    }).populate<{ userId: InstanceType<typeof User> }>("id");
+    });
+
     if (!refreshToken) return null;
-    return refreshToken.userId;
+
+    const user = await getUserById(refreshToken.userId.toString());
+    return user;
 }
 
 export async function dbRevokeRefreshToken(token: string) {
-    const result = await RefreshToken.findOneAndUpdate({ token }, { revokedAt: new Date() }, { new: true });
+    const result = await RefreshToken.findOneAndUpdate(
+        { token },
+        { revokedAt: new Date() },
+        { returnDocument: "after" },
+    );
     if (!result) {
         throw new Error("Couldn't revoke token");
     }

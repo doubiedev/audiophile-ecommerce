@@ -1,11 +1,13 @@
-import type { Request } from "express";
+import type { NextFunction, Request, Response } from "express";
 
-import { BadRequestError, UserNotAuthenticatedError } from "#utils/errors.js";
+import { validateJWT } from "#services/auth.service.js";
+import { getUserById } from "#services/user.service.js";
+import { BadRequestError, UserForbiddenError, UserNotAuthenticatedError } from "#utils/errors.js";
 
 export function getAPIKey(req: Request) {
     const authHeader = req.get("Authorization");
     if (!authHeader) {
-        throw new UserNotAuthenticatedError("Malformed authorization header");
+        throw new UserNotAuthenticatedError("Missing authorization header");
     }
     return extractApiKey(authHeader);
 }
@@ -13,9 +15,42 @@ export function getAPIKey(req: Request) {
 export function getBearerToken(req: Request) {
     const authHeader = req.get("Authorization");
     if (!authHeader) {
-        throw new UserNotAuthenticatedError("Malformed authorization header");
+        throw new UserNotAuthenticatedError("Missing authorization header");
     }
     return extractBearerToken(authHeader);
+}
+
+export async function requireAuth(req: Request, _: Response, next: NextFunction) {
+    const token = getBearerToken(req);
+    const userId = validateJWT(token);
+    const user = await getUserById(userId);
+    if (!user) {
+        throw new UserNotAuthenticatedError("User no longer exists");
+    }
+    req.user = { id: userId, roles: user.roles };
+    next();
+}
+
+export function requireOwnerOrAdmin(req: Request, _: Response, next: NextFunction) {
+    const isOwner = req.user?.id === req.params.id;
+    const isAdmin = req.user?.roles.includes("admin");
+    if (!isOwner && !isAdmin) {
+        throw new UserForbiddenError("You cannot modify another user's account");
+    }
+    next();
+}
+
+export function requireRoles(...roles: string[]) {
+    return (req: Request, _: Response, next: NextFunction) => {
+        if (!req.user) {
+            throw new UserNotAuthenticatedError("Not authenticated");
+        }
+        const hasRole = roles.some((role) => req.user?.roles.includes(role));
+        if (!hasRole) {
+            throw new UserForbiddenError("Insufficient permissions");
+        }
+        next();
+    };
 }
 
 function extractApiKey(header: string) {

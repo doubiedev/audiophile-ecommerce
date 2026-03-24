@@ -1,16 +1,15 @@
 ### 
 
+@baseURL = http://localhost:{{PORT}}/api
 @email = test@test.com
-@loginURL = http://localhost:{{PORT}}/api/auth/login
 @name = Test User
 @newPassword = password456
 @password = password123
-@usersURL = http://localhost:{{PORT}}/api/users
 
 
-### create user
+### Create user
 
-POST {{usersURL}} HTTP/1.1
+POST {{baseURL}}/users HTTP/1.1
 Content-Type: application/json
 
 {
@@ -20,9 +19,11 @@ Content-Type: application/json
 }
 
 
-### login
+### Login
 
-POST {{loginURL}} HTTP/1.1
+# @name login
+
+POST {{baseURL}}/auth/sessions HTTP/1.1
 Content-Type: application/json
 
 {
@@ -31,9 +32,21 @@ Content-Type: application/json
 }
 
 
-### update user
+### Get all users (admin only)
 
-PUT {{usersURL}} HTTP/1.1
+GET {{baseURL}}/users HTTP/1.1
+Authorization: Bearer {{login.response.body.$.token}}
+
+
+### Get user by id
+
+GET {{baseURL}}/users/{{login.response.body.$.id}} HTTP/1.1
+Authorization: Bearer {{login.response.body.$.token}}
+
+
+### Update user
+
+PATCH {{baseURL}}/users/{{login.response.body.$.id}} HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 
@@ -44,15 +57,35 @@ Authorization: Bearer {{login.response.body.$.token}}
 }
 
 
-### login with new password
+### Login with new password (verifies update worked)
 
-POST {{loginURL}} HTTP/1.1
+# @name loginNewPassword
+
+POST {{baseURL}}/auth/sessions HTTP/1.1
 Content-Type: application/json
 
 {
   "email": "{{email}}",
   "password": "{{newPassword}}"
 }
+
+
+### Refresh token
+
+PUT {{baseURL}}/auth/sessions HTTP/1.1
+Authorization: Bearer {{loginNewPassword.response.body.$.refreshToken}}
+
+
+### Revoke token
+
+DELETE {{baseURL}}/auth/sessions HTTP/1.1
+Authorization: Bearer {{loginNewPassword.response.body.$.refreshToken}}
+
+
+### Delete user (uses new token since refresh token was revoked)
+
+DELETE {{baseURL}}/users/{{login.response.body.$.id}} HTTP/1.1
+Authorization: Bearer {{loginNewPassword.response.body.$.token}}
 
 
 ### 

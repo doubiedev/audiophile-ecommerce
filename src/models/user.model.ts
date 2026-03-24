@@ -5,6 +5,7 @@ interface IUser {
     email: string;
     hashedPassword: string;
     name: string;
+    roles: ("admin" | "user")[];
     updatedAt: Date;
 }
 
@@ -13,6 +14,7 @@ const userSchema = new Schema<IUser>(
         email: { maxLength: 256, required: true, type: String, unique: true },
         hashedPassword: { maxLength: 256, required: true, type: String },
         name: { required: true, type: String },
+        roles: { default: ["user"], enum: ["admin", "user"], required: true, type: [String] },
 
         // TODO: add cart & cartschema to attach to users
         // cart: cartSchema,
@@ -29,7 +31,7 @@ const userSchema = new Schema<IUser>(
     },
 );
 
-export type NewUser = Omit<IUser, "createdAt" | "updatedAt">;
+export type NewUser = Omit<IUser, "createdAt" | "roles" | "updatedAt">;
 export type UserResponse = Omit<IUser, "hashedPassword"> & { id: string };
 
 const User = mongoose.model("User", userSchema);

@@ -32,12 +32,13 @@ export async function handlerLogin(req: Request, res: Response) {
     const accessToken = makeJWT(user.id, config.jwt.defaultDuration);
     const refreshToken = makeRefreshToken();
     await saveRefreshToken(user.id, refreshToken);
-    res.status(200).json({
+    res.status(201).json({
         createdAt: user.createdAt,
         email: user.email,
         id: user.id,
         name: user.name,
         refreshToken,
+        roles: user.roles,
         token: accessToken,
         updatedAt: user.updatedAt,
     } satisfies LoginResponse);
