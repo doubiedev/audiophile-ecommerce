@@ -1,36 +1,38 @@
 import { checkPasswordHash, hashPassword, makeJWT, makeRefreshToken, validateJWT } from "#services/auth.service.js";
 import { UserNotAuthenticatedError } from "#utils/errors.js";
 import jwt from "jsonwebtoken";
-import { describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 
 const TEST_USER_ID = "q88rJnxdDPYYY7PsBGwCc6QpZ2X7Frvb";
 const TEST_PASSWORD = "password123";
 const ONE_HOUR = 60 * 60;
 
+let TEST_HASH_1: string;
+let TEST_HASH_2: string;
+
+beforeAll(async () => {
+    TEST_HASH_1 = await hashPassword(TEST_PASSWORD);
+    TEST_HASH_2 = await hashPassword(TEST_PASSWORD);
+});
+
 describe("hashPassword", () => {
-    it("should return a hash different from the input", async () => {
-        const hash = await hashPassword(TEST_PASSWORD);
-        expect(hash).not.toBe(TEST_PASSWORD);
+    it("should return a hash different from the input", () => {
+        expect(TEST_HASH_1).not.toBe(TEST_PASSWORD);
     });
-    it("should return a different hash each time for the same input", async () => {
-        const hash1 = await hashPassword(TEST_PASSWORD);
-        const hash2 = await hashPassword(TEST_PASSWORD);
-        expect(hash1).not.toBe(hash2);
+    it("should return a different hash each time for the same input", () => {
+        expect(TEST_HASH_1).not.toBe(TEST_HASH_2);
     });
 });
 
 describe("checkPasswordHash", () => {
     it("should return true for a matching password", async () => {
-        const hash = await hashPassword(TEST_PASSWORD);
-        expect(await checkPasswordHash(TEST_PASSWORD, hash)).toBe(true);
+        expect(await checkPasswordHash(TEST_PASSWORD, TEST_HASH_1)).toBe(true);
     });
     it("should return false for a non-matching password", async () => {
-        const hash = await hashPassword(TEST_PASSWORD);
-        expect(await checkPasswordHash("wrongpassword", hash)).toBe(false);
+        expect(await checkPasswordHash("wrongpassword", TEST_HASH_1)).toBe(false);
     });
     it("should return false for an empty password", async () => {
-        const hash = await hashPassword(TEST_PASSWORD);
-        expect(await checkPasswordHash("", hash)).toBe(false);
+        expect(await checkPasswordHash("", TEST_HASH_1)).toBe(false);
     });
 });
 
