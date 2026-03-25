@@ -1,3 +1,5 @@
+name: audiophile
+
 services:
     mongodb:
         image: mongo:7.0

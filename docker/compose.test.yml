@@ -1,0 +1,10 @@
+name: audiophile-test
+
+services:
+    mongodb-test:
+        image: mongo:7.0
+        container_name: mongodb-test
+        ports:
+            - "27018:27017"
+        tmpfs:
+            - /data/db
