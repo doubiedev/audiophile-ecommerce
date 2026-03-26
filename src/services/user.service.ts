@@ -73,7 +73,7 @@ function formatUserResponse(user: InstanceType<typeof User>): UserResponse {
         email: user.email,
         id: user.id,
         name: user.name,
-        roles: user.roles,
+        role: user.role,
         updatedAt: user.updatedAt,
     };
 }

@@ -19,6 +19,7 @@ const loginSchema = z.object({
     password: z.string().min(1),
 });
 
+// TODO: handle logins with existing jwt/refresh tokens?
 export async function handlerLogin(req: Request, res: Response) {
     const params = loginSchema.parse(req.body);
     const user = await getUserByEmail(params.email);
@@ -38,7 +39,7 @@ export async function handlerLogin(req: Request, res: Response) {
         id: user.id,
         name: user.name,
         refreshToken,
-        roles: user.roles,
+        role: user.role,
         token: accessToken,
         updatedAt: user.updatedAt,
     } satisfies LoginResponse);

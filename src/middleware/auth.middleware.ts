@@ -27,13 +27,13 @@ export async function requireAuth(req: Request, _: Response, next: NextFunction)
     if (!user) {
         throw new UserNotAuthenticatedError("User no longer exists");
     }
-    req.user = { id: userId, roles: user.roles };
+    req.user = { id: userId, role: user.role };
     next();
 }
 
 export function requireOwnerOrAdmin(req: Request, _: Response, next: NextFunction) {
     const isOwner = req.user?.id === req.params.id;
-    const isAdmin = req.user?.roles.includes("admin");
+    const isAdmin = req.user?.role.includes("admin");
     if (!isOwner && !isAdmin) {
         throw new UserForbiddenError("You cannot modify another user's account");
     }
@@ -45,7 +45,7 @@ export function requireRoles(...roles: string[]) {
         if (!req.user) {
             throw new UserNotAuthenticatedError("Not authenticated");
         }
-        const hasRole = roles.some((role) => req.user?.roles.includes(role));
+        const hasRole = roles.some((role) => req.user?.role.includes(role));
         if (!hasRole) {
             throw new UserForbiddenError("Insufficient permissions");
         }
