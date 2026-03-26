@@ -1,6 +1,7 @@
 import { config } from "#config/config.js";
 import RefreshToken from "#models/refreshToken.model.js";
 import { getUserById } from "#services/user.service.js";
+import { UserNotAuthenticatedError } from "#utils/errors.js";
 
 export async function dbDeleteRefreshTokensForUser(userId: string) {
     return RefreshToken.deleteMany({ userId });
@@ -26,7 +27,7 @@ export async function dbRevokeRefreshToken(token: string) {
         { returnDocument: "after" },
     );
     if (!result) {
-        throw new Error("Couldn't revoke token");
+        throw new UserNotAuthenticatedError("Invalid refresh token");
     }
 }
 
