@@ -4,8 +4,8 @@ import express from "express";
 const router = express.Router();
 
 // Public
-router.post("/sessions", handlerLogin);
-router.put("/sessions", handlerRefresh);
-router.delete("/sessions", handlerRevoke);
+router.post("/login", handlerLogin);
+router.post("/refresh", handlerRefresh);
+router.post("/revoke", handlerRevoke);
 
 export default router;
