@@ -4,6 +4,7 @@ export default defineConfig({
     test: {
         globals: true,
         setupFiles: ["./src/__tests__/setup.ts"],
+        fileParallelism: false,
         env: {
             JWT_SECRET: "test-secret-for-unit-tests",
             PLATFORM: "dev",

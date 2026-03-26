@@ -24,9 +24,6 @@ export async function requireAuth(req: Request, _: Response, next: NextFunction)
     const token = getBearerToken(req);
     const userId = validateJWT(token);
     const user = await getUserById(userId);
-    if (!user) {
-        throw new UserNotAuthenticatedError("User no longer exists");
-    }
     req.user = { id: userId, role: user.role };
     next();
 }
@@ -42,10 +39,11 @@ export function requireOwnerOrAdmin(req: Request, _: Response, next: NextFunctio
 
 export function requireRoles(...roles: string[]) {
     return (req: Request, _: Response, next: NextFunction) => {
-        if (!req.user) {
+        const role = req.user?.role;
+        if (!role) {
             throw new UserNotAuthenticatedError("Not authenticated");
         }
-        const hasRole = roles.some((role) => req.user?.role.includes(role));
+        const hasRole = roles.some((r) => role.includes(r));
         if (!hasRole) {
             throw new UserForbiddenError("Insufficient permissions");
         }

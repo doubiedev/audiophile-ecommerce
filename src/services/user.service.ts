@@ -51,7 +51,11 @@ export async function getUserByEmail(email: string) {
 }
 
 export async function getUserById(id: string) {
-    return dbGetUserById(id);
+    const user = await dbGetUserById(id);
+    if (!user) {
+        throw new NotFoundError(`User with id: ${id} not found`);
+    }
+    return formatUserResponse(user);
 }
 
 export async function updateUser(userId: string, email?: string, password?: string, name?: string) {

@@ -5,8 +5,8 @@ import { describe, expect, it } from "vitest";
 const request = supertest(app);
 
 const TEST_USER = {
-    email: "test@test.com",
-    name: "Test User",
+    email: "auth-test@test.com",
+    name: "Auth Test User",
     password: "password123",
 };
 
