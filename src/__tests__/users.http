@@ -23,7 +23,7 @@ Content-Type: application/json
 
 # @name login
 
-POST {{baseURL}}/auth/sessions HTTP/1.1
+POST {{baseURL}}/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
@@ -61,7 +61,7 @@ Authorization: Bearer {{login.response.body.$.token}}
 
 # @name loginNewPassword
 
-POST {{baseURL}}/auth/sessions HTTP/1.1
+POST {{baseURL}}/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
@@ -72,13 +72,13 @@ Content-Type: application/json
 
 ### Refresh token
 
-PUT {{baseURL}}/auth/sessions HTTP/1.1
+POST {{baseURL}}/auth/refresh HTTP/1.1
 Authorization: Bearer {{loginNewPassword.response.body.$.refreshToken}}
 
 
 ### Revoke token
 
-DELETE {{baseURL}}/auth/sessions HTTP/1.1
+POST {{baseURL}}/auth/revoke HTTP/1.1
 Authorization: Bearer {{loginNewPassword.response.body.$.refreshToken}}
 
 
