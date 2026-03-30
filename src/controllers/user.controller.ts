@@ -5,9 +5,9 @@ import { objectIdSchema } from "#utils/validators.js";
 import { z } from "zod";
 
 const createUserSchema = z.object({
-    email: z.email(),
-    name: z.string().min(1),
-    password: z.string().min(1),
+    email: z.email().min(1).max(256),
+    name: z.string().min(1).max(256),
+    password: z.string().min(1).max(256),
 });
 
 export async function handlerCreateUser(req: Request, res: Response) {
@@ -36,9 +36,9 @@ export async function handlerGetUserById(req: Request, res: Response) {
 }
 
 const updateUserSchema = z.object({
-    email: z.email().optional(),
-    name: z.string().min(1).optional(),
-    password: z.string().min(1).optional(),
+    email: z.email().min(1).max(256).optional(),
+    name: z.string().min(1).max(256).optional(),
+    password: z.string().min(1).max(256).optional(),
 });
 
 export async function handlerUpdateUser(req: Request, res: Response) {
