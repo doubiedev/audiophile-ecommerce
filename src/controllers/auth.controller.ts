@@ -1,3 +1,4 @@
+import type { LoginInput } from "#utils/validators.js";
 import type { Request, Response } from "express";
 
 import { config } from "#config/config.js";
@@ -7,21 +8,15 @@ import { checkPasswordHash, makeJWT, makeRefreshToken } from "#services/auth.ser
 import { getUserForRefreshToken, revokeRefreshToken, saveRefreshToken } from "#services/refreshToken.service.js";
 import { getUserByEmail } from "#services/user.service.js";
 import { UserNotAuthenticatedError } from "#utils/errors.js";
-import { z } from "zod";
 
 type LoginResponse = UserResponse & {
     refreshToken: string;
     token: string;
 };
 
-const loginSchema = z.object({
-    email: z.email(),
-    password: z.string().min(1),
-});
-
 // TODO: handle logins with existing jwt/refresh tokens?
 export async function handlerLogin(req: Request, res: Response) {
-    const params = loginSchema.parse(req.body);
+    const params = req.validated.body as LoginInput;
     const user = await getUserByEmail(params.email);
     if (!user) {
         throw new UserNotAuthenticatedError("Invalid email or password");

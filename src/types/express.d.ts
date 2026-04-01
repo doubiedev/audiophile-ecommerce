@@ -7,6 +7,11 @@ declare global {
                 id: string;
                 role: string;
             };
+            validated: {
+                body?: unknown;
+                params?: unknown;
+                query?: unknown;
+            };
         }
     }
 }
