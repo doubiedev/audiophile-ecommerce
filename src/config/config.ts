@@ -1,5 +1,5 @@
 interface APIConfig {
-    platform: string;
+    nodeEnv: string;
     port: number;
 }
 
@@ -30,7 +30,7 @@ function envOrThrow(key: string) {
 
 export const config: Config = {
     api: {
-        platform: envOrThrow("PLATFORM"),
+        nodeEnv: envOrThrow("NODE_ENV"),
         port: Number(envOrThrow("PORT")),
     },
     db: {

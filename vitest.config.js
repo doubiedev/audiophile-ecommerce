@@ -6,8 +6,8 @@ export default defineConfig({
         setupFiles: ["./src/__tests__/setup.ts"],
         fileParallelism: false,
         env: {
+            NODE_ENV: "test",
             JWT_SECRET: "test-secret-for-unit-tests",
-            PLATFORM: "dev",
             PORT: "8000",
             DB_URL: "mongodb://localhost:27018/audiophile-test",
         },

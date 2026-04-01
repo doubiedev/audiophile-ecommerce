@@ -8,7 +8,7 @@
         "dev": "concurrently \"npm run server\" \"npm run client\"",
         "start": "node --env-file .env dist/server.js",
         "build": "tsc -p tsconfig.build.json",
-        "db": "docker compose -f docker/compose.yml up -d",
+        "db": "docker compose --env-file .env -f docker/compose.yml up -d",
         "db:stop": "docker compose -f docker/compose.yml down",
         "test": "vitest",
         "test:db": "docker compose -f docker/compose.test.yml up -d",

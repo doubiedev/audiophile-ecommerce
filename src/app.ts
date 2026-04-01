@@ -14,7 +14,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 
-if (config.api.platform === "prod") {
+if (config.api.nodeEnv === "production") {
     const __dirname = path.resolve();
     app.use(express.static(path.join(__dirname, "frontend/dist")));
     app.get("*", (_: Request, res: Response) => {
