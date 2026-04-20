@@ -33,7 +33,12 @@ async function createAdminUser() {
         email: TEST_ADMIN.email,
         password: TEST_ADMIN.password,
     });
-    return { ...res.body, role: user.role } as { email: string; id: string; role: string; token: string };
+    return { ...res.body, role: user.role } as {
+        email: string;
+        id: string;
+        role: string;
+        token: string;
+    };
 }
 
 async function createUser(data = TEST_USER) {
@@ -145,7 +150,9 @@ describe("GET /api/users/:id", () => {
 
     it("should return 400 for invalid id format with auth", async () => {
         const { token } = await loginUser();
-        const res = await request.get("/api/users/invalid-id").set("Authorization", `Bearer ${token}`);
+        const res = await request
+            .get("/api/users/invalid-id")
+            .set("Authorization", `Bearer ${token}`);
         expect(res.status).toBe(400);
     });
 
@@ -162,9 +169,19 @@ describe("GET /api/users/:id", () => {
 
     it("should return 403 for non-owner accessing other user profile", async () => {
         await loginUser();
-        const otherUser = await createUser({ email: "other@test.com", name: "Other", password: "password123" });
-        const { token } = await loginUser({ email: "self@test.com", name: "Self", password: "password123" });
-        const res = await request.get(`/api/users/${otherUser.id}`).set("Authorization", `Bearer ${token}`);
+        const otherUser = await createUser({
+            email: "other@test.com",
+            name: "Other",
+            password: "password123",
+        });
+        const { token } = await loginUser({
+            email: "self@test.com",
+            name: "Self",
+            password: "password123",
+        });
+        const res = await request
+            .get(`/api/users/${otherUser.id}`)
+            .set("Authorization", `Bearer ${token}`);
         expect(res.status).toBe(403);
     });
 
@@ -202,9 +219,12 @@ describe("PATCH /api/users/:id", () => {
 
     it("should return 200 for owner updating own profile", async () => {
         const { id, token } = await loginUser();
-        const res = await request.patch(`/api/users/${id}`).set("Authorization", `Bearer ${token}`).send({
-            name: "Updated Name",
-        });
+        const res = await request
+            .patch(`/api/users/${id}`)
+            .set("Authorization", `Bearer ${token}`)
+            .send({
+                name: "Updated Name",
+            });
         expect(res.status).toBe(200);
         expect(res.body).toMatchObject({
             id,
@@ -214,9 +234,12 @@ describe("PATCH /api/users/:id", () => {
 
     it("should return 200 for owner updating email", async () => {
         const { id, token } = await loginUser();
-        const res = await request.patch(`/api/users/${id}`).set("Authorization", `Bearer ${token}`).send({
-            email: "updated@test.com",
-        });
+        const res = await request
+            .patch(`/api/users/${id}`)
+            .set("Authorization", `Bearer ${token}`)
+            .send({
+                email: "updated@test.com",
+            });
         expect(res.status).toBe(200);
         expect(res.body).toMatchObject({
             email: "updated@test.com",
@@ -226,27 +249,44 @@ describe("PATCH /api/users/:id", () => {
 
     it("should return 200 for owner updating password", async () => {
         const { id, token } = await loginUser();
-        const res = await request.patch(`/api/users/${id}`).set("Authorization", `Bearer ${token}`).send({
-            password: "newpassword123",
-        });
+        const res = await request
+            .patch(`/api/users/${id}`)
+            .set("Authorization", `Bearer ${token}`)
+            .send({
+                password: "newpassword123",
+            });
         expect(res.status).toBe(200);
     });
 
     it("should return 400 for invalid email in update", async () => {
         const { id, token } = await loginUser();
-        const res = await request.patch(`/api/users/${id}`).set("Authorization", `Bearer ${token}`).send({
-            email: "not-an-email",
-        });
+        const res = await request
+            .patch(`/api/users/${id}`)
+            .set("Authorization", `Bearer ${token}`)
+            .send({
+                email: "not-an-email",
+            });
         expect(res.status).toBe(400);
     });
 
     it("should return 403 for non-owner updating other user profile", async () => {
         await loginUser();
-        const otherUser = await createUser({ email: "other@test.com", name: "Other", password: "password123" });
-        const { token } = await loginUser({ email: "self@test.com", name: "Self", password: "password123" });
-        const res = await request.patch(`/api/users/${otherUser.id}`).set("Authorization", `Bearer ${token}`).send({
-            name: "Hacked Name",
+        const otherUser = await createUser({
+            email: "other@test.com",
+            name: "Other",
+            password: "password123",
         });
+        const { token } = await loginUser({
+            email: "self@test.com",
+            name: "Self",
+            password: "password123",
+        });
+        const res = await request
+            .patch(`/api/users/${otherUser.id}`)
+            .set("Authorization", `Bearer ${token}`)
+            .send({
+                name: "Hacked Name",
+            });
         expect(res.status).toBe(403);
     });
 
@@ -254,9 +294,12 @@ describe("PATCH /api/users/:id", () => {
         await createAdminUser();
         const { id } = await createUser();
         const { token } = await loginAdminUser();
-        const res = await request.patch(`/api/users/${id}`).set("Authorization", `Bearer ${token}`).send({
-            name: "Admin Updated Name",
-        });
+        const res = await request
+            .patch(`/api/users/${id}`)
+            .set("Authorization", `Bearer ${token}`)
+            .send({
+                name: "Admin Updated Name",
+            });
         expect(res.status).toBe(200);
     });
 });
@@ -269,21 +312,35 @@ describe("DELETE /api/users/:id", () => {
 
     it("should return 400 for invalid id format with auth", async () => {
         const { token } = await loginUser();
-        const res = await request.delete("/api/users/invalid-id").set("Authorization", `Bearer ${token}`);
+        const res = await request
+            .delete("/api/users/invalid-id")
+            .set("Authorization", `Bearer ${token}`);
         expect(res.status).toBe(400);
     });
 
     it("should return 204 for owner deleting own profile", async () => {
         const { id, token } = await loginUser();
-        const res = await request.delete(`/api/users/${id}`).set("Authorization", `Bearer ${token}`);
+        const res = await request
+            .delete(`/api/users/${id}`)
+            .set("Authorization", `Bearer ${token}`);
         expect(res.status).toBe(204);
     });
 
     it("should return 403 for non-owner deleting other user profile", async () => {
         await loginUser();
-        const otherUser = await createUser({ email: "other@test.com", name: "Other", password: "password123" });
-        const { token } = await loginUser({ email: "self@test.com", name: "Self", password: "password123" });
-        const res = await request.delete(`/api/users/${otherUser.id}`).set("Authorization", `Bearer ${token}`);
+        const otherUser = await createUser({
+            email: "other@test.com",
+            name: "Other",
+            password: "password123",
+        });
+        const { token } = await loginUser({
+            email: "self@test.com",
+            name: "Self",
+            password: "password123",
+        });
+        const res = await request
+            .delete(`/api/users/${otherUser.id}`)
+            .set("Authorization", `Bearer ${token}`);
         expect(res.status).toBe(403);
     });
 
@@ -291,7 +348,9 @@ describe("DELETE /api/users/:id", () => {
         await createAdminUser();
         const { id } = await createUser();
         const { token } = await loginAdminUser();
-        const res = await request.delete(`/api/users/${id}`).set("Authorization", `Bearer ${token}`);
+        const res = await request
+            .delete(`/api/users/${id}`)
+            .set("Authorization", `Bearer ${token}`);
         expect(res.status).toBe(204);
     });
 

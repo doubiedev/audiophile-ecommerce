@@ -5,7 +5,11 @@ import { config } from "#config/config.js";
 import { getBearerToken } from "#middleware/auth.middleware.js";
 import { type UserResponse } from "#models/user.model.js";
 import { checkPasswordHash, makeJWT, makeRefreshToken } from "#services/auth.service.js";
-import { getUserForRefreshToken, revokeRefreshToken, saveRefreshToken } from "#services/refreshToken.service.js";
+import {
+    getUserForRefreshToken,
+    revokeRefreshToken,
+    saveRefreshToken,
+} from "#services/refreshToken.service.js";
 import { getUserByEmail } from "#services/user.service.js";
 import { UserNotAuthenticatedError } from "#utils/errors.js";
 

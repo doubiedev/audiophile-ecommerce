@@ -20,7 +20,13 @@ router.post("/", validateBody(createUserSchema), handlerCreateUser);
 router.get("/", requireAuth, requireRoles("admin"), handlerGetAllUsers);
 
 // Owner or admin
-router.get("/:id", validateParams({ id: objectIdSchema }), requireAuth, requireOwnerOrAdmin, handlerGetUserById);
+router.get(
+    "/:id",
+    validateParams({ id: objectIdSchema }),
+    requireAuth,
+    requireOwnerOrAdmin,
+    handlerGetUserById,
+);
 router.patch(
     "/:id",
     validateParams({ id: objectIdSchema }),
@@ -29,6 +35,12 @@ router.patch(
     requireOwnerOrAdmin,
     handlerUpdateUser,
 );
-router.delete("/:id", validateParams({ id: objectIdSchema }), requireAuth, requireOwnerOrAdmin, handlerDeleteUser);
+router.delete(
+    "/:id",
+    validateParams({ id: objectIdSchema }),
+    requireAuth,
+    requireOwnerOrAdmin,
+    handlerDeleteUser,
+);
 
 export default router;

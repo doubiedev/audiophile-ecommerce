@@ -65,20 +65,26 @@ describe("POST /api/auth/login", () => {
 describe("POST /api/auth/refresh", () => {
     it("should return a new access token for a valid refresh token", async () => {
         const { refreshToken } = await createAndLoginUser();
-        const res = await request.post("/api/auth/refresh").set("Authorization", `Bearer ${refreshToken}`);
+        const res = await request
+            .post("/api/auth/refresh")
+            .set("Authorization", `Bearer ${refreshToken}`);
         expect(res.status).toBe(200);
         expect(res.body).toHaveProperty("token");
     });
 
     it("should return 401 for an invalid refresh token", async () => {
-        const res = await request.post("/api/auth/refresh").set("Authorization", "Bearer invalidtoken");
+        const res = await request
+            .post("/api/auth/refresh")
+            .set("Authorization", "Bearer invalidtoken");
         expect(res.status).toBe(401);
     });
 
     it("should return 401 for a revoked refresh token", async () => {
         const { refreshToken } = await createAndLoginUser();
         await request.post("/api/auth/revoke").set("Authorization", `Bearer ${refreshToken}`);
-        const res = await request.post("/api/auth/refresh").set("Authorization", `Bearer ${refreshToken}`);
+        const res = await request
+            .post("/api/auth/refresh")
+            .set("Authorization", `Bearer ${refreshToken}`);
         expect(res.status).toBe(401);
     });
 
@@ -91,7 +97,9 @@ describe("POST /api/auth/refresh", () => {
 describe("POST /api/auth/revoke", () => {
     it("should return 204 and revoke the token", async () => {
         const { refreshToken } = await createAndLoginUser();
-        const res = await request.post("/api/auth/revoke").set("Authorization", `Bearer ${refreshToken}`);
+        const res = await request
+            .post("/api/auth/revoke")
+            .set("Authorization", `Bearer ${refreshToken}`);
         expect(res.status).toBe(204);
     });
 
@@ -101,7 +109,9 @@ describe("POST /api/auth/revoke", () => {
     });
 
     it("should return 401 for an invalid refresh token", async () => {
-        const res = await request.post("/api/auth/revoke").set("Authorization", "Bearer invalidtoken");
+        const res = await request
+            .post("/api/auth/revoke")
+            .set("Authorization", "Bearer invalidtoken");
         expect(res.status).toBe(401);
     });
 });

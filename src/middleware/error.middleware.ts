@@ -4,7 +4,12 @@ import { MongoServerError } from "mongodb";
 import { Error as MongooseError } from "mongoose";
 import { ZodError } from "zod";
 
-export default function errorMiddleware(err: Error, _req: Request, res: Response, _next: NextFunction) {
+export default function errorMiddleware(
+    err: Error,
+    _req: Request,
+    res: Response,
+    _next: NextFunction,
+) {
     if (err instanceof ZodError) {
         res.status(400).json({
             error: "Validation error",

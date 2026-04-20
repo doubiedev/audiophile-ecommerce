@@ -86,24 +86,3 @@ Authorization: Bearer {{loginNewPassword.response.body.$.refreshToken}}
 
 DELETE {{baseURL}}/users/{{login.response.body.$.id}} HTTP/1.1
 Authorization: Bearer {{loginNewPassword.response.body.$.token}}
-
-
-### 
-
-# ### get all users
-# # GET "{{usersURL}}" HTTP/1.1
-# Content-Type: application/json
-# ### update user
-# # PUT "{{usersURL}}" HTTP/1.1
-# Content-Type: application/json
-# # {
-# "email": "{{email}}",
-# "password": "{{password}}"
-# }
-# ### delete user
-# # DELETE "{{usersURL}}" HTTP/1.1
-# Content-Type: application/json
-# # {
-# "email": "{{email}}",
-# "password": "{{password}}"
-# }

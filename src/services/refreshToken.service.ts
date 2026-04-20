@@ -1,4 +1,8 @@
-import { dbGetUserForRefreshToken, dbRevokeRefreshToken, dbSaveRefreshToken } from "#queries/refreshToken.queries.js";
+import {
+    dbGetUserForRefreshToken,
+    dbRevokeRefreshToken,
+    dbSaveRefreshToken,
+} from "#queries/refreshToken.queries.js";
 import { UserNotAuthenticatedError } from "#utils/errors.js";
 
 export async function getUserForRefreshToken(token: string) {

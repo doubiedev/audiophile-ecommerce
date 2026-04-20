@@ -1,4 +1,10 @@
-import { checkPasswordHash, hashPassword, makeJWT, makeRefreshToken, validateJWT } from "#services/auth.service.js";
+import {
+    checkPasswordHash,
+    hashPassword,
+    makeJWT,
+    makeRefreshToken,
+    validateJWT,
+} from "#services/auth.service.js";
 import { UserNotAuthenticatedError } from "#utils/errors.js";
 import jwt from "jsonwebtoken";
 import { beforeAll, describe, expect, it } from "vitest";
@@ -74,10 +80,14 @@ describe("validateJWT", () => {
     });
 
     it("should throw UserNotAuthenticatedError for wrong issuer", () => {
-        const token = jwt.sign({ iss: "wrong-issuer", sub: TEST_USER_ID }, process.env.JWT_SECRET ?? "test-secret", {
-            algorithm: "HS256",
-            expiresIn: ONE_HOUR,
-        });
+        const token = jwt.sign(
+            { iss: "wrong-issuer", sub: TEST_USER_ID },
+            process.env.JWT_SECRET ?? "test-secret",
+            {
+                algorithm: "HS256",
+                expiresIn: ONE_HOUR,
+            },
+        );
         expect(() => validateJWT(token)).toThrow(UserNotAuthenticatedError);
     });
 });

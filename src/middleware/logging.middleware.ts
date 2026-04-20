@@ -6,7 +6,9 @@ export default function middlewareLogResponse(req: Request, res: Response, next:
         const duration = Date.now() - start;
         const status = res.statusCode;
         const level = status >= 500 ? "ERROR" : status >= 400 ? "WARN" : "INFO";
-        console.log(`[${level}] ${req.method} ${req.url} ${status.toString()} - ${duration.toString()}ms`);
+        console.log(
+            `[${level}] ${req.method} ${req.url} ${status.toString()} - ${duration.toString()}ms`,
+        );
     });
     next();
 }

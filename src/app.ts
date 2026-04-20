@@ -2,6 +2,7 @@ import { config } from "#config/config.js";
 import errorMiddleware from "#middleware/error.middleware.js";
 import middlewareLogResponse from "#middleware/logging.middleware.js";
 import authRoutes from "#routes/auth.routes.js";
+import productRoutes from "#routes/product.routes.js";
 import userRoutes from "#routes/user.routes.js";
 import express, { type Request, type Response } from "express";
 import path from "path";
@@ -12,6 +13,7 @@ app.use(middlewareLogResponse);
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 
 if (config.api.nodeEnv === "production") {

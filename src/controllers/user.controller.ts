@@ -1,7 +1,13 @@
 import type { CreateUserInput, ObjectId, UpdateUserInput } from "#utils/validators.js";
 import type { Request, Response } from "express";
 
-import { createUser, deleteUser, getAllUsers, getUserById, updateUser } from "#services/user.service.js";
+import {
+    createUser,
+    deleteUser,
+    getAllUsers,
+    getUserById,
+    updateUser,
+} from "#services/user.service.js";
 
 export async function handlerCreateUser(req: Request, res: Response) {
     const params = req.validated.body as CreateUserInput;
